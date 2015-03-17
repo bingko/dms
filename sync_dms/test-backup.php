@@ -1,0 +1,60 @@
+﻿<?php
+//echo "test odbc";
+$host ="172.31.4.101";
+//$host ="172.31.7.53";
+$user = "DC500";
+$passwd = "cocoq";
+$obj = mssql_connect($host,$user,$passwd);
+if($obj){
+	echo "OK Connect ";
+}else
+{
+	echo "Cannot connect";
+
+}
+
+$value_date = date("m/d/Y");
+echo $value_date ;
+/*
+
+SELECT     *, sampleName AS Expr1, sampleName AS Expr2, Gram AS Expr3, Weight AS Expr4, Grammage AS Expr5, Thickness AS Expr6, RoughnessTOP AS Expr7, 
+                      RoughnessBOT AS Expr8, Porosity AS Expr9, ISO_B AS Expr10, Color_L AS Expr11, Color_a AS Expr12, Color_b AS Expr13, Opacity AS Expr14, 
+                      CIE_WI AS Expr15, Density AS Expr16, Type AS Expr17, Reject AS Expr18
+FROM         dbo.properties
+*/
+echo $Reject;
+
+echo $sampleName ."<br>";
+echo $sampleName ."<br>";
+echo $Gram ."<br>";
+echo $Weight   ."<br>";
+echo $Grammage  ."<br>";
+echo $Thickness  ."<br>";
+echo $RoughnessTOP   ."<br>";
+echo $RoughnessBOT  ."<br>";
+echo $Porosity  ."<br>";
+echo $ISO_B  ."<br>";
+echo $Color_L  ."<br>";
+echo $Color_a  ."<br>";
+echo $Color_b  ."<br>";
+echo $Density  ."<br>";
+echo $Type ."<br>";
+echo $Reject ."<br>";
+ 
+$sql=" insert into properties".
+     "( sampleName,  Gram,Weight ,Grammage ,Thickness ,RoughnessTOP ,RoughnessBOT ,Porosity ,ISO_B ,Color_L ,Color_a,Color_b ,Density,Type,Reject) ".
+	 " values (null, '$Gram','$Weight' ,'$Grammage' ,'$Thickness' ,'$RoughnessTOP' ,'$RoughnessBOT' ,'$Porosity' ,'$ISO_B' ,'$Color_L' ,'$Color_a','$Color_b' ,'$Density','$Type','$Reject');   ";
+ 
+//echo $sql;
+//$sql = "select * from properties ";
+ 
+$i=0;
+//$sql=" insert into properties (Gram) values ('333);";
+mssql_select_db('COQPPPC');
+$rs=mssql_query($sql) or die("ERROR $sql");
+//$row = mssql_fetch_array($rs);
+echo "<pre>";
+print_r($row);
+
+//http://172.31.7.53:88/test/test-backup.php?sampleName=1&sampleName=1&Gram=1&Weight=1&Grammage=1&Thickness=1&RoughnessTOP=1&RoughnessBOT=1&Porosity=1&ISO_B=1&Color_L=1&Color_a=1&Color_b=1&Density=1&Type=1&Reject=2
+?>

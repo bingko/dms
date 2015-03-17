@@ -1,0 +1,120 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+    -moz-transform: scale(0.9, 0.9); /* Moz-browsers */
+    zoom: 0.9; /* Other non-webkit browsers */
+    zoom: 90%; /* Webkit browsers */
+}
+.badge {
+  padding: 3px 12px 4px;
+  font-size: 1em;
+  font-weight: bold;
+  white-space: nowrap;
+  color: #ffffff;
+  background-color: #999999;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 8px;
+}
+.badge-primary {
+  background-color: #337ab7;
+}
+.badge-primary:hover {
+  background-color: #0665b7;
+}
+.badge:hover {
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+.badge-error {
+  background-color: #b94a48;
+}
+.badge-error:hover {
+  background-color: #953b39;
+}
+.badge-warning {
+  background-color: #f89406;
+}
+.badge-warning:hover {
+  background-color: #c67605;
+}
+.badge-success {
+  background-color: #468847;
+}
+
+.badge-success:hover {
+  background-color: #356635;
+}
+.badge-info {
+  background-color: #097d9f;
+}
+.badge-info:hover {
+  background-color: #076b89;
+}
+.badge-inverse {
+  background-color: #333333;
+}
+.badge-inverse:hover {
+  background-color: #1a1a1a;
+}
+.badge-green {
+  background-color:#690;
+}
+.badge-green:hover {
+  background-color:#390;
+}
+.badge-red {
+  background-color:#BA0000;
+}
+.badge-red:hover {
+  background-color:#B72323;
+}
+.tooltip.top .tooltip-inner {
+    background-color:#990;
+}
+.tooltip.top .tooltip-arrow {
+	border-top-color: #990;
+}
+.overflow-tb{
+	margin:0px;
+	padding:0px;
+	overflow:auto; 
+	width:105%; 
+	height:145px;
+	overflow-x: hidden;
+}
+.blink_me {
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 2s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+
+    animation-name: blinker;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@-moz-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1.0; }
+}
+
+@keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1.0; }
+}
