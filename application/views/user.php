@@ -102,7 +102,7 @@
                         pageable: true,
                         toolbar: ["create"],
                         columns: [
-                            { field:"user_name", title: "<div align='center'>ชื่อผู้ใช้งาน</div>" ,width:"35%"  },
+                            { field:"user_name", title: "<div align='center'>ชื่อ - นามสกุล</div>" ,width:"35%"  },
 							{ field:"user_email", title: "<div align='center'>E-mail</div>" ,width:"25%"  },
 							{ field:"user_level",values:user_level, title:"<div align='center'>กลุ่มผู้ใช้งาน</div>",width: "20%" },
 							{ field: "user_password",  hidden: true, title:"<div align='center'>Password</div>" },
