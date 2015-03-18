@@ -1,0 +1,101 @@
+<?php
+
+$mysql_con = mysqli_connect("172.31.7.228","root","m1ndb;2009");
+if(mysqli_connect_error())
+{
+	echo "fadfad";
+}
+
+mysqli_select_db($mysql_con,'dms_master');
+$sql_truncate = "TRUNCATE TABLE `roll_winder` ";
+$result = mysqli_query($mysql_con,$sql_truncate) or die ("ABC");
+//////////////////////////
+$sql_select_max = "SELECT  max(id)  as max_roll_id FROM `roll_winder`  ";
+$result = mysqli_query($mysql_con,$sql_select_max) or die ("ABC");
+$rs = mysqli_fetch_array($result);
+//$max_id_mysql = $rs["max_roll_id"];
+//$next_sync = $max_id_mysql+2000;
+
+$max_id_mysql =690000;
+$next_sync =  1200000;
+
+
+ 
+//////////////////////
+ //exit;
+$conn = odbc_connect("DMS","cvt","cvt") or die("Can not connect ODBC1!!!1");
+ $sql = "select * from Roll_Winder where id between   '".$max_id_mysql."'  and '".$next_sync."' order by id ";
+ //  echo $sql;
+ echo " <hr>";
+//  $sql = "select * from RollInCVTArea_Temp   ";
+//echo "<br><br> ==>";
+ 
+$query = odbc_exec($conn,$sql);
+$i=0;
+ 
+
+//////v 
+
+while(odbc_fetch_row($query)){
+	 
+		 $insert_mysql = "INSERT INTO  `roll_winder` (  
+		 	`id` ,  
+		 	`Rollid` ,  
+		 	`Rollid2` , 
+		 	 `Machineid` ,  
+		 	 `Winderid` ,  
+		 	 `ReelNo` ,  
+		 	 `Date_s` , 
+		 	  `Shift_s` ,  
+		 	  `Date_f` , 
+		 	   `Shift_f` ,  `FinishTime` ,  `WLBM` ,  `Type` ,  `Grade` ,  `Basisweight` ,  `CustomerOrder` ,  `OrderNo` ,  `Width` ,  `Length` ,  `Diameter` ,  `Calc_W` ,  `Weight` ,  `Weight_Net` ,  `Core` ,  `Splice` ,  `Property` ,  `PLC_Dest` ,  `Destination` ,  `New_Dest` ,  `Remark` ,  `itemNo` ,  `saleType` ,  `Brand` ,  `PrintNetWeight` )  " .
+
+		 "VALUES ( ".
+		 " '".odbc_result($query,"id")."',  " .
+		 " '".odbc_result($query,"Rollid")."',  " .
+		 " '".odbc_result($query,"Rollid2")."',  " .
+		 " '".odbc_result($query,"Machineid")."',  " .
+		 " '".odbc_result($query,"Winderid")."',  " .
+		 " '".odbc_result($query,"ReelNo")."',  " .
+		 " '".odbc_result($query,"Date_s")."',  " .
+		   " '".odbc_result($query,"Shift_s")."',  " .
+		 " '".odbc_result($query,"Date_f")."',  " .
+		  " '".odbc_result($query,"Shift_f")."',  " .
+
+		 " '".odbc_result($query,"FinishTime")."',  " .
+		 " '".odbc_result($query,"WLBM")."',  " .
+		 " '".odbc_result($query,"Type")."',  " .
+		 " '".odbc_result($query,"Grade")."',  " .
+		 " '".odbc_result($query,"Basisweight")."',  " .
+		 " '".odbc_result($query,"CustomerOrder")."',  " .
+		 " '".odbc_result($query,"OrderNo")."',  " .
+		 " '".odbc_result($query,"Width")."',  " .
+		 " '".odbc_result($query,"Length")."',  " .
+		 " '".odbc_result($query,"Diameter")."',  " .
+		 " '".odbc_result($query,"Calc_W")."',  " .
+		 " '".odbc_result($query,"Weight")."',  " .
+		 " '".odbc_result($query,"Weight_Net")."',  " .
+		 " '".odbc_result($query,"Core")."',  " .
+		 " '".odbc_result($query,"Splice")."',  " .
+		 " '".odbc_result($query,"Property")."',  " .
+		 " '".odbc_result($query,"PLC_Dest")."',  " .
+		 " '".odbc_result($query,"Destination")."',  " .
+		  " '".odbc_result($query,"New_Dest")."',  " .
+		 " '".odbc_result($query,"Remark")."',  " .
+		 " '".odbc_result($query,"itemNo")."',  " .
+		 " '".odbc_result($query,"saleType")."',  " .
+		 " '".odbc_result($query,"Brand")."',  " .
+		 " '".odbc_result($query,"PrintNetWeight")."' " .
+		 "); ";
+
+
+	//	echo $i." ".$insert_mysql ;
+		echo $i." ".odbc_result($query,"id")." <font color=green >Sync OK</font><br>";
+		mysqli_query($mysql_con,$insert_mysql);
+		//mysqli_select_db()
+		echo "<br>";
+		$i++;
+} 
+mysqli_close();
+
+?>
