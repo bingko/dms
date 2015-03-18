@@ -63,8 +63,8 @@ class logSheet extends CI_Controller {
 	}
 	public function input_ream()
 	{
-		$this->db->where('shift',$this->uri->segment(3));
 		$this->db->where('date',$this->uri->segment(4));
+		$this->db->where('shift',$this->uri->segment(5));
 		$query=$this->db->get('log_ream');
 		if(empty($query->result_array())){
 			$data['page'] = "input_ream";

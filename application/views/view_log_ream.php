@@ -189,7 +189,7 @@
 					if(!empty($problem)){
 						while(true){
 							echo '<tr>';
-							for($i=0;$i<count($problem);$i++){
+							for($i=$problemNum;$i<count($problem);$i++){
 								$problem_minute=$this->log_ream_model->search_problem($problem[$problemNum],$problem_value); //get total minute
 								echo	'<td colspan="3">'.$problem[$problemNum]['problem_name'].'</td>';
 								echo	'<td><input type="text" class="form-control" name="problem[]" value="'.$problem_minute['total_minutes'].'"><input type="hidden" class="form-control" value="'.$problem_minute['ID'].'" name="ream_problem_id[]"/>';
