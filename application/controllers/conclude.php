@@ -18,6 +18,7 @@ class conclude extends CI_Controller {
 			$cutsize[$i]['CT'] = $getdb[$i]['Sheeter'];
 			$cutsize[$i]['shift'] = $getdb[$i]['Shift_q'];
 			$cutsize[$i]['lot'] = $getdb[$i]['lot'];
+			$cutsize[$i]['CustomerOrder'] = $getdb[$i]['CustomerOrder'];
 			$cutsize[$i]['time'] = $getdb[$i]['FinishTime'];
 			$cutsize[$i]['running_time'] = null;
 			$cutsize[$i]['remake'] = $getdb[$i]['sale_type'].$getdb[$i]['Brand'];
@@ -33,11 +34,11 @@ class conclude extends CI_Controller {
 			$cutsize[$i]['ream']=$getdb[$i]['Ream'];
 			$cutsize[$i]['Sort']=$getdb[$i]['Sort'];
 			$cutsize[$i]['N']=$getdb[$i]['N'];
-			$cutsize[$i]['output']=$this->calculate_output($getdb[$i]);
+			$cutsize[$i]['output']=$this->calculate_output($getdb[$i],$sheeter);
 			$cutsize[$i]['output_n']= $this->calculate_output_N($getdb[$i]);
 			$cutsize[$i]['total_reject']=($cutsize[$i]['input'])-($cutsize[$i]['output']);
 			if($cutsize[$i]['input']!=0){ //divide by 0 exception
-				$cutsize[$i]['trim_lost']=((($cutsize[$i]['width']-($cutsize[$i]['width']-40))/($cutsize[$i]['width']))*$cutsize[$i]['input']); //trim_lost
+				$cutsize[$i]['trim_lost']=$this->calculate_trim_lost($getdb[$i],$cutsize[$i]['input'],$sheeter);
 				$cutsize[$i]['percent_reject']=$cutsize[$i]['total_reject']/$cutsize[$i]['input']*100;
 				$cutsize[$i]['reject']=$cutsize[$i]['total_reject']-$cutsize[$i]['trim_lost'];
 				$cutsize[$i]['actual_reject']=$cutsize[$i]['reject']/$cutsize[$i]['input']*100;
@@ -99,16 +100,18 @@ class conclude extends CI_Controller {
 		return $grade;
 	}
 	
-	public function calculate_output($data){
+	public function calculate_output($data,$sheeter){
 		$output = 0.0000;
-		if($data['Width']>100){
-			$output=(round(round(round(((($data['Width']/25.4)*($data['Length']/25.4)*$data['Basisweight']))/3100,4),3),2)*$data['Ream']/1000);
-		}
-		else if($data['Width']<100){
-			$output=(round(round(round((($data['Width']*$data['Length']*$data['Basisweight']))/3100,4),3),2)*$data['Ream']/1000);
-		}
+			if($data['Width']>100){
+				$output=((ROUND(ROUND(ROUND(($data['Width']/25.4)*($data['Length']/25.4)*$data['Basisweight']/3100,4),3),2))*$data['Ream'])/1000;
+			}
+			else if($data['Width']<100){
+				$output=(round(round(round((($data['Width']*$data['Length']*$data['Basisweight']))/3100,4),3),2)*$data['Ream']/1000);
+			}
 		return $output;
 	}
+	
+	
 	public function calculate_output_N($data){
 		$output = 0.0000;
 		if($data['Width']>100){
@@ -118,6 +121,18 @@ class conclude extends CI_Controller {
 			$output=(round(round(round((($data['Width']*$data['Length']*$data['Basisweight']))/3100,4),3),2)*$data['N']/1000);
 		}
 		return $output;
+	}
+	
+	
+	public function calculate_trim_lost($data,$input,$sheeter){
+		$trim_lost = 0.0000;
+		if($sheeter==1||$sheeter==4){
+			$trim_lost=@((($data['roll_width']-($data['roll_width']-40))/($data['roll_width']))*$input); //trim_lost
+		}
+		else{
+			$trim_lost=($data['roll_width']-($data['Width']*$data['out_pallet']))*$input/($data['roll_width']);
+		}
+		return $trim_lost;
 	}
 }
 

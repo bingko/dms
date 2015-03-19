@@ -248,6 +248,11 @@ class logSheet extends CI_Controller {
 			}
 		}
 	}
+	public function log_ream_report(){
+		$data['downtime']=$this->log_ream_model->getDownTime();
+		$data['page']='log_ream_report';
+		$this->load->view('index',$data);
+	}
 
 	
 }
