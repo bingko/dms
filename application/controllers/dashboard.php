@@ -37,12 +37,11 @@ class dashboard extends CI_Controller {
 		
 		// ดึงข้อมูลจาก Nplan //
 		$data['nplan'] = $this->$nplan_model->get_order_detail($InData);
-		// echo "<pre>";
+		// echo "<Pre>";
 		// print_r($list_nplan);
 		// print_r($InData);
-
 		// print_r($data['nplan']);
-		// exit();
+
 		if(empty($data['nplan'])){
 			$data['nplan'][0] = array
 		        (
@@ -79,15 +78,7 @@ class dashboard extends CI_Controller {
 		            'status' => 1
 		        );
 			$data['real_time'] = 'n/a';
-			$date = new DateTime($list_nplan[0]['FinishTime']);
-			$date->sub(new DateInterval('P5D'));
-			$limit_date = $date->format('Y-m-d');
 		}else{
-
-		$date = new DateTime($data['nplan'][0]['start_date']);
-		$date->sub(new DateInterval('P5D'));
-		$limit_date = $date->format('Y-m-d');
-
                 /*
                  nplan.Status
                  0 = ยังไม่ทำ
@@ -102,7 +93,9 @@ class dashboard extends CI_Controller {
         $this->$nplan_model->updateStatus($UpdateData);
 		}
 
-
+		$date = new DateTime($list_nplan[0]['FinishTime']);
+		$date->sub(new DateInterval('P5D'));
+		$limit_date = $date->format('Y-m-d');		
 		$roll_done = $this->$nplan_model->get_orderNo($InData,$limit_date);
 		$data['real_time'] = $roll_done[0]['FinishTime'];
 		
@@ -169,16 +162,12 @@ class dashboard extends CI_Controller {
 			            'status'  => 'n/a', 
 			        );
 			    $data['real_time'] = 'n/a';
-				$date = new DateTime($list_nplan[0]['FinishTime']);
-				$date->sub(new DateInterval('P5D'));
-				$limit_date = $date->format('Y-m-d');
-			}else{
-				$date = new DateTime($data['nplan'][0]['date_store']);
-				$date->sub(new DateInterval('P5D'));
-				$limit_date = $date->format('Y-m-d');
+				
 			}
 		//print_r($data['nplan']);
-	
+		$date = new DateTime($list_nplan[0]['FinishTime']);
+		$date->sub(new DateInterval('P5D'));
+		$limit_date = $date->format('Y-m-d');
 		$roll_done = $this->$nplan_model->get_orderNo($InData,$limit_date);
 
 		// echo "<pre>";
@@ -307,9 +296,7 @@ class dashboard extends CI_Controller {
 		            'status' => 1
 		        );
 			$data['real_time'] = 'n/a';
-			$date = new DateTime($list_nplan[0]['FinishTime']);
-			$date->sub(new DateInterval('P5D'));
-			$limit_date = $date->format('Y-m-d');
+			
 			$data['next_plan'] = '';
 			$data['old_plan'] = '';
 		}else{
@@ -327,19 +314,15 @@ class dashboard extends CI_Controller {
 			}elseif($Grade==4){ 
 					$data['nplan'][0]['grade'] = "LPP";
 			}
-			
-
-			$date = new DateTime($data['nplan'][0]['start_date']);
-			$date->sub(new DateInterval('P5D'));
-			$limit_date = $date->format('Y-m-d');
-
 			$UpdateData = array(
 	            'nplan_id' => $data['nplan'][0]['nplan_id'],
 	            'status' => 1
 	            );
 	        $this->$nplan_model->updateStatus($UpdateData);
 		}
-
+		$date = new DateTime($list_nplan[0]['FinishTime']);
+		$date->sub(new DateInterval('P5D'));
+		$limit_date = $date->format('Y-m-d');
 		$data['pallet_done'] = $this->$nplan_model->get_pallet_done($InData,$limit_date);
 
 		$roll_done = $this->$nplan_model->get_orderNo($InData,$limit_date);
@@ -408,20 +391,17 @@ class dashboard extends CI_Controller {
 			            'status'  => 'n/a', 
 			        );
 			    $data['real_time'] = 'n/a';
-				$date = new DateTime($list_nplan[0]['FinishTime']);
-				$date->sub(new DateInterval('P5D'));
-				$limit_date = $date->format('Y-m-d');
 				$data['next_plan'] = '';
 				$data['old_plan'] = '';
 			}else{
-				$date = new DateTime($data['nplan'][0]['date_store']);
-				$date->sub(new DateInterval('P5D'));
-				$limit_date = $date->format('Y-m-d');
 				$nplan_id = $data['nplan'][0]['nplan_id'];
 				$data['next_plan'] = $this->$nplan_model->get_next_order($nplan_id);
 				$data['old_plan'] = $this->$nplan_model->get_old_order($nplan_id);
 			}
 		//print_r($data['nplan']);
+		$date = new DateTime($list_nplan[0]['FinishTime']);
+		$date->sub(new DateInterval('P5D'));
+		$limit_date = $date->format('Y-m-d');
 		$data['pallet_done'] = $this->$nplan_model->get_pallet_done($InData,$limit_date);
 		$roll_done = $this->$nplan_model->get_orderNo($InData,$limit_date);
 

@@ -167,19 +167,30 @@ if(isset($logSheet_set)){ ?>
       </div>
       <div class="modal-body">
         <div class="row">
-        	<?php $no=1; foreach($logSheet_set as $value_set){?>
+        	<?php   $no=1; 
+					$sum_weight = 0;
+					$sum_ream = 0;
+					foreach($logSheet_set as $value_set){?>
         	<div class="col-lg-4" align="center">
             <table class="table">
             <thead>
               <th colspan="2"><?php echo anchor('logSheet/edit_cutsize/'.$cutter.'/'.$datetime2->format('Y-m').'/'.$value_set['c_id'], 'Set '.$no ); ?></th>
             </thead>
             <tbody>
+            	<tr>
+                    <td>Input(kg.) </td>
+                    <td><?php echo number_format($value_set['input_weight']);?></td>
+                 </tr>
+                 <tr>
+                    <td>Output(kg.) </td>
+                    <td><?php echo number_format($value_set['output_weight']);?></td>
+                 </tr>
                 <tr>
-                    <td>Total Ream </td>
+                    <td>Ream </td>
                     <td><?php echo number_format($value_set['total_ream']);?></td>
                  </tr>
                  <tr>
-                    <td>Total Reject(kg.) </td>
+                    <td>Reject(kg.) </td>
                     <td><?php echo $value_set['total_reject'].' ('.$value_set['total_reject_percentage'].'%)';?></td>
                  </tr>
             </tbody>
@@ -188,7 +199,32 @@ if(isset($logSheet_set)){ ?>
 			
             
             </div>
-           	<?php $no++;}?>
+           	<?php $no++;
+				$sum_weight += $value_set['output_weight']; 
+				$sum_ream += $value_set['total_ream']; 
+				
+			}?>
+        </div><hr />
+        <div class="row">
+ 	       <div class="col-lg-10 col-lg-offset-1 " align="center">
+           <table class="table">
+            <thead>
+              <th colspan="2"><strong>Summary</strong></th>
+            </thead>
+            <tbody>
+            	<tr>
+                    <td><strong>Total FG(kg.)</strong> </td>
+                    <td><?php echo number_format($sum_weight);?></td>
+                 </tr>
+                <tr>
+                    <td><strong>Total Ream </strong></td>
+                    <td><?php echo number_format($sum_ream);?></td>
+                 </tr>
+                 
+            </tbody>
+              
+            </table>
+           </div>
         </div>
       </div>
       <div class="modal-footer">
