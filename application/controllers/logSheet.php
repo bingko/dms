@@ -71,8 +71,8 @@ class logSheet extends CI_Controller {
 	}
 	public function input_ream()
 	{
-		$this->db->where('shift',$this->uri->segment(3));
 		$this->db->where('date',$this->uri->segment(4));
+		$this->db->where('shift',$this->uri->segment(5));
 		$query=$this->db->get('log_ream');
 		if(empty($query->result_array())){
 			$data['page'] = "input_ream";
@@ -246,6 +246,11 @@ class logSheet extends CI_Controller {
 				$this->db->insert('log_ream_detail',$ream_detail);
 			}
 		}
+	}
+	public function log_ream_report(){
+		$data['downtime']=$this->log_ream_model->getDownTime();
+		$data['page']='log_ream_report';
+		$this->load->view('index',$data);
 	}
 
 	

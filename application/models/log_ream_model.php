@@ -12,11 +12,11 @@ class log_ream_model extends CI_Model {
 		return $query->result_array();
 	}	
 	public function get_log_ream_detail($shift_id)
-	{	
+	{
 		$this->db->where('log_ream_id',$shift_id);
 		$query = $this->db->get('log_ream_detail');
 		return $query->result_array();
-	}	
+	}
 	public function get_log_ream_problem_by_id($log_ream_id)
 	{	
 		$this->db->where('log_ream_id',$log_ream_id);
@@ -33,6 +33,21 @@ class log_ream_model extends CI_Model {
 				break;
 			}
 		}
+	}
+	public function getDownTime(){
+	$this->db->select('
+		log_sheet_problem.problem_name,
+		SUM(log_ream_problem.total_minutes) as total_minutes
+	');
+	$this->db->from('log_sheet_problem');
+	$this->db->join('log_ream_problem','log_sheet_problem.problem_id=log_ream_problem.problem_id','left');
+	$this->db->where('cutter_type',3);
+	$this->db->group_by('problem_name');
+	$query=$this->db->get();
+	return $query->result_array();
+	//echo '<pre>';
+	//print_r($query->result_array());
+	//exit();
 	}
 	
 		

@@ -40,7 +40,7 @@
 			
 			?> </span></strong> &nbsp;&nbsp;&nbsp; กะ
             <span class="text_blue">
-            <?php $Shift_q = $this->uri->segment(3);
+            <?php $Shift_q = $this->uri->segment(5);
 				if($Shift_q==1){
 					echo " เช้า (07.00 - 15.00 น.) ";
 				}elseif($Shift_q==2){
@@ -182,7 +182,7 @@
 					$problemNum=0;
 					while(true){
 						echo '<tr>';
-						for($i=0;$i<count($problem);$i++){
+						for($i=$problemNum;$i<count($problem);$i++){
 							echo	'<td colspan="3">'.$problem[$problemNum]['problem_name'].'</td>';
 							echo	'<td><input type="text" class="form-control" name="problem[]"/>';
 							echo 	'<input type="hidden" class="form-control" value="'.$problem[$problemNum]['problem_id'].'" name="problem_id[]"/>';
