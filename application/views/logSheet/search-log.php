@@ -120,6 +120,11 @@
 						echo '<div class="col-lg-4" align="center"><a href="'.site_url().'/logSheet/input_cutsize/'.$this->uri->segment(3)."/".$datetime2->format('Y-m-d')."/"."2".'"><span class="badge badge-success"><i class="fa fa-skyatlas"></i></span></a></div>';
 						echo '<div class="col-lg-4" align="center"><a href="'.site_url().'/logSheet/input_cutsize/'.$this->uri->segment(3)."/".$datetime2->format('Y-m-d')."/"."3".'"><span class="badge badge-warning"><i class="fa fa-moon-o"></span></i></a></div>';
 					}
+					elseif($this->uri->segment(3)==2||$this->uri->segment(3)==3){
+						echo '<div class="col-lg-4" align="center"><a href="'.site_url().'/logSheet/input_cutsize/'.$this->uri->segment(3)."/".$datetime2->format('Y-m-d')."/"."1".'"><span class="badge badge-primary"><i class="fa fa-sun-o"></i></span></a></div>';
+						echo '<div class="col-lg-4" align="center"><a href="'.site_url().'/logSheet/input_cutsize/'.$this->uri->segment(3)."/".$datetime2->format('Y-m-d')."/"."2".'"><span class="badge badge-success"><i class="fa fa-skyatlas"></i></span></a></div>';
+						echo '<div class="col-lg-4" align="center"><a href="'.site_url().'/logSheet/input_cutsize/'.$this->uri->segment(3)."/".$datetime2->format('Y-m-d')."/"."3".'"><span class="badge badge-warning"><i class="fa fa-moon-o"></span></i></a></div>';
+					}
 					elseif($this->uri->segment(3)==5){
 						echo '<div class="col-lg-4" align="center"><a href="'.site_url().'/logSheet/input_ream/'.$this->uri->segment(3)."/".$datetime2->format('Y-m-d')."/"."1".'"><span class="badge badge-primary"><i class="fa fa-sun-o"></i></span></a></div>';
 						echo '<div class="col-lg-4" align="center"><a href="'.site_url().'/logSheet/input_ream/'.$this->uri->segment(3)."/".$datetime2->format('Y-m-d')."/"."2".'"><span class="badge badge-success"><i class="fa fa-skyatlas"></i></span></a></div>';
@@ -163,7 +168,26 @@ if(isset($logSheet_set)){ ?>
       <div class="modal-body">
         <div class="row">
         	<?php $no=1; foreach($logSheet_set as $value_set){?>
-        	<div class="col-lg-3" align="center"><?php echo anchor('logSheet/viewSet_detail/'.$cutter.'/'.$datetime2->format('Y-m').'/'.$value_set['c_id'], 'Set '.$no ); ?></div>
+        	<div class="col-lg-4" align="center">
+            <table class="table">
+            <thead>
+              <th colspan="2"><?php echo anchor('logSheet/edit_cutsize/'.$cutter.'/'.$datetime2->format('Y-m').'/'.$value_set['c_id'], 'Set '.$no ); ?></th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Total Ream </td>
+                    <td><?php echo number_format($value_set['total_ream']);?></td>
+                 </tr>
+                 <tr>
+                    <td>Total Reject(kg.) </td>
+                    <td><?php echo $value_set['total_reject'].' ('.$value_set['total_reject_percentage'].'%)';?></td>
+                 </tr>
+            </tbody>
+              
+            </table>
+			
+            
+            </div>
            	<?php $no++;}?>
         </div>
       </div>

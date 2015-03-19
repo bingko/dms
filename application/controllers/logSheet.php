@@ -47,10 +47,18 @@ class logSheet extends CI_Controller {
 	}
 	public function edit_cutsize()
 	{
+		echo $c_id  = $this->uri->segment(5);
+		$data['detail_CutSite'] = $this->logsheet_model->getLogSheet_set_detail($c_id);
+		$data['detail_problem'] = $this->logsheet_model->getLogSheet_problem_detail($c_id);
+		$data['detail_remark'] = $this->logsheet_model->getLogSheet_remark_detail($c_id);
+		// echo "<pre>";
+		// print_r($data);
+		// exit();
+		$cutter = $this->uri->segment(3);
 		$data['cutter'] = $this->uri->segment(3);
-		$data['data'] = $this->uri->segment(4);
-		$data['Shift_q'] = $this->uri->segment(5);
-		$data['page'] = "logSheet/formCutSite";
+		$data['get_problem'] = $this->logsheet_model->get_problem($cutter);
+		
+		$data['page'] = "logSheet/formCutSite_edit";
 		$this->load->view('index',$data);
 	}
 	public function input_folio()
@@ -80,15 +88,6 @@ class logSheet extends CI_Controller {
 		$this->load->view('index',$data);	
 	}
 	
-	public function formCutSite_edit()
-	{
-		$data['cutter'] = $this->uri->segment(3);
-		$data['data'] = $this->uri->segment(4);
-		$data['Shift_q'] = $this->uri->segment(5);
-		$data['page'] = "logSheet/formCutSite1";
-		$this->load->view('index',$data);
-	}
-
 	public function list_cutsize1()
 	{
 		$this->logsheet_model->getLogSheet();

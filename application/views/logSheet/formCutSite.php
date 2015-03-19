@@ -69,7 +69,7 @@
                    
                     </select>  </td>
                    <td height="50" align="right">    <label for="exampleInputName2">M/C speed </label>    &nbsp;&nbsp; </td>
-                    <td height="50" align="center">    <input type="text" class="form-control textbox"  name="" placeholder="M/C speed ">  </td> 
+                    <td height="50" align="center">    <input type="text" class="form-control textbox"  name="mcspeed" placeholder="M/C speed ">  </td> 
                 </tr>
 
                   <tr width=100> 
@@ -229,6 +229,7 @@
                     <?php echo $value_prob['problem_name']?>
                 </div>
                 <div class="col-sm-2">
+                	<input type="hidden" name="problem_id[]" value="<?php echo $value_prob['problem_id']?>">
                     <input type="number" class="form-control textbox" name="downtime[]" placeholder="นาที">
                 </div>
                 <div class="col-sm-2">
@@ -245,23 +246,242 @@
 	<div class="col-sm-12">
     <div class="panel panel-green">
             <div class="panel-heading">
-                <h3 class="panel-title"> <i class="fa fa-exclamation-triangle fa-x2"></i>&nbsp;&nbsp; Remark / หมายเหตุ </h3>
+                <h3 class="panel-title"> <i class="fa fa-certificate fa-x2"></i>&nbsp;&nbsp; Remark / หมายเหตุ </h3>
             </div>
       
         <div class="panel-body">
             <div class="row">
-            <?php foreach($get_problem as $value_prob){?>
                 <div class="col-sm-2" align="right">
-                    <?php echo $value_prob['problem_name']?>
+                    Total Finished Goods
                 </div>
                 <div class="col-sm-2">
-                    <input type="number" class="form-control textbox" name="downtime[]" placeholder="นาที">
+                    <select  name="size_finished" class="form-control textbox">
+                      <option value='A4'>A4</option>
+                      <option value-'A3'>A3</option>
+                      <option value='B4'>B4</option>
+                      <option value='B5'>B5</option>
+                    </select>
                 </div>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control textbox" name="remark[]" placeholder="หมายเหตุ">
+                    <input type="text" class="form-control textbox" name="remark_ton" placeholder="ton">
                 </div>
-            <?php }?>
+                <div class="col-sm-2" align="right">
+                    <strong>Total FG</strong>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control textbox" name="remark_total_fg" placeholder="kg.">
+                </div>
+                <div class="col-sm-1" align="left">
+                    kg.
+                </div>
+                
+            </div><br />
+            <!-- //////// Summary Data //////  -->
+            <div class="row">
+            	<div class="col-sm-4">
+                	<div class="row">
+                        <div class="col-sm-6" align="right">
+                            เกรด / แกรม
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control textbox" name="remark_grade1" placeholder="ton">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6" align="right">
+                            Mat No.
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control textbox" name="remark_mat1" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6" align="right">
+                            จำนวน
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control textbox" name="remark_ream1" placeholder="รีม">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6" align="right">
+                            น้ำหนัก
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control textbox" name="remark_weight1" placeholder="กก.">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                	<div class="row">
+                        <div class="col-sm-6" align="right">
+                            เกรด / แกรม
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control textbox" name="remark_grade2" placeholder="ton">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6" align="right">
+                            Mat No.
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control textbox" name="remark_mat2" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6" align="right">
+                            จำนวน
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control textbox" name="remark_ream2" placeholder="รีม">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6" align="right">
+                            น้ำหนัก
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control textbox" name="remark_weight2" placeholder="กก.">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                	<div class="row">
+                        <div class="col-sm-6" align="right">
+                            เกรด / แกรม
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control textbox" name="remark_grade3" placeholder="ton">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6" align="right">
+                            Mat No.
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control textbox" name="remark_mat3" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6" align="right">
+                            จำนวน
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control textbox" name="remark_ream3" placeholder="รีม">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6" align="right">
+                            น้ำหนัก
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control textbox" name="remark_weight3" placeholder="กก.">
+                        </div>
+                    </div>
+                </div>
+            </div><br />
+            <!-- //////// End Summary Data //////  -->
+            <div class="row">
+                <div class="col-sm-2" align="right">
+                    หัวหน้ากะ
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control textbox" name="remark_head_shift" placeholder="">
+                </div>
+            </div><br />
+            <div class="row">
+                <div class="col-sm-2" align="right">
+                    พนักงานประจำเครื่องตัด
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control textbox" name="remark_employee1" placeholder="">
+                </div>
+                <div class="col-sm-2" align="right">
+                    พนักงานทำล่วงเวลา 
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control textbox" name="remark_em_ot1" placeholder="">
+                </div>
+            </div><br />
+			<div class="row">
+                <div class="col-sm-2" align="right">
+                    
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control textbox" name="remark_employee2" placeholder="">
+                </div>
+                <div class="col-sm-2" align="right">
+                     
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control textbox" name="remark_em_ot2" placeholder="">
+                </div>
+            </div><br />
+			<div class="row">
+                <div class="col-sm-2" align="right">
+                    
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control textbox" name="remark_employee3" placeholder="">
+                </div>
+                <div class="col-sm-2" align="right">
+                     
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control textbox" name="remark_em_ot3" placeholder="">
+                </div>
+            </div><br />
+			<div class="row">
+                <div class="col-sm-2" align="right">
+                    คู่ธุรกิจ
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control textbox" name="remark_customer" placeholder="">
+                </div>
+            </div><br /><br />
+			<div class="row">
+                <div class="col-sm-3">
+                    <strong>วัสดุเพื่อการผลิตเสียหาย</strong>
+                </div>
+            </div><br />
+			<div class="row">
+                <div class="col-sm-2" align="right">
+                    เปลือกห่อ
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control textbox" name="remark_mat_dmg1" placeholder="">
+                </div>
+                <div class="col-sm-2" align="right">
+                    กล่อง 
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control textbox" name="remark_mat_dmg2" placeholder="">
+                </div>
+            </div><br />
+			<div class="row">
+                <div class="col-sm-2" align="right">
+                    ฝา
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control textbox" name="remark_mat_dmg3" placeholder="">
+                </div>
+                <div class="col-sm-2" align="right">
+                    ม้วนรัดกล่อง 
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control textbox" name="remark_mat_dmg4" placeholder="">
+                </div>
+            </div><br /><br />
+			<div class="row">
+                <div class="col-sm-2" align="right">
+                    <strong>หมายเหตุ</strong>
+                </div>
+                <div class="col-sm-10">
+                   	<textarea name="remark" class="form-control"></textarea>
+                </div>
             </div>
+            
         </div>
     </div>
     </div>

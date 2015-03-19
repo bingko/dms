@@ -17,6 +17,7 @@ class logSheet_cutsize extends CI_Controller {
 		 "roll_width"  =>  $_POST["roll_width"],
 		 "lot_no"  =>     $_POST["lot_no"],
 		 "size"  =>   $_POST["size"],
+		 "mcspeed" => $_POST["mcspeed"],
 		 "lot_no"  =>   $_POST["lot_no"],
 		  "start_time"  =>   $_POST["start_time"],
 		  "end_time"  =>   $_POST["end_time"],
@@ -63,8 +64,167 @@ class logSheet_cutsize extends CI_Controller {
 		  "problem_i"  =>  $_POST["problem_i"]
 		 );
 		$id = $this->logsheet_model->logSheetInsert($inData);
-		// echo '<Pre>';
+		//echo '<Pre>';
 		// print_r($inData);
+		$count_prom =count($this->input->post('problem_id'));
+		for($i=0;$i<$count_prom;$i++){
+			$inData = array(
+				"problem_id"  =>   $_POST["problem_id"][$i],
+				"total_minutes"  =>  $_POST["downtime"][$i],
+				"problem_remark"  =>  $_POST["remark"][$i],
+				"c_id"  =>  $id,
+			);
+		$this->logsheet_model->cutSizePrombleInsert($inData);
+		}
+
+		$inData = array(
+			"c_id"  =>  $id,
+			'size' => $this->input->post('size_finished'),
+			'ton' => $this->input->post('remark_ton'),
+			'total_fg' => $this->input->post('remark_total_fg'),
+			'grade1' => $this->input->post('remark_grade1'),
+			'mat1' => $this->input->post('remark_mat1'),
+			'ream1' => $this->input->post('remark_ream1'),
+			'weight1' => $this->input->post('remark_weight1'),
+			'grade2' => $this->input->post('remark_grade2'),
+			'mat2' => $this->input->post('remark_mat2'),
+			'ream2' => $this->input->post('remark_ream2'),
+			'weight2' => $this->input->post('remark_weight2'),
+			'grade3' => $this->input->post('remark_grade3'),
+			'mat3' => $this->input->post('remark_mat3'),
+			'ream3' => $this->input->post('remark_ream3'),
+			'weight3' => $this->input->post('remark_weight3'),
+			'head_shift' => $this->input->post('remark_head_shift'),
+			'employee1' => $this->input->post('remark_employee1'),
+			'employee2' => $this->input->post('remark_employee2'),
+			'employee3' => $this->input->post('remark_employee3'),
+			'em_ot1' => $this->input->post('remark_em_ot1'),
+			'em_ot2' => $this->input->post('remark_em_ot2'),
+			'em_ot3' => $this->input->post('remark_em_ot3'),
+			'customer_name' => $this->input->post('remark_customer'),
+			'mat_for_dmg1' => $this->input->post('remark_mat_dmg1'),
+			'mat_for_dmg2' => $this->input->post('remark_mat_dmg2'),
+			'mat_for_dmg3' => $this->input->post('remark_mat_dmg3'),
+			'mat_for_dmg4' => $this->input->post('remark_mat_dmg4'),
+			'remark' => $this->input->post('remark'),
+		);
+		$this->logsheet_model->cutSizeRemarkInsert($inData);
+		//print_r($inData);
+		// exit();
+		redirect('logSheet/searchLog/'.$_POST["cut_size"].'/'.date('Y-m'));
+	}
+	public function edit_input_cutsize()
+	{
+		$c_id = $_POST["c_id"];
+		$inData = array(
+		"c_id" => $_POST["c_id"],
+		"cut_size" => $_POST["cut_size"],
+		"date" => $_POST["date"],
+		"shift" => $_POST["shift"],
+		 "appearance"  => $_POST["appearance"],
+		  "box"  =>   $_POST["box"],
+		  "cover"  =>  $_POST["cover"],
+		 "grade_gram"  =>   $_POST["grade_gram"],
+		 "order_no"  =>   $_POST["order_no"],
+		 "roll_width"  =>  $_POST["roll_width"],
+		 "lot_no"  =>     $_POST["lot_no"],
+		 "size"  =>   $_POST["size"],
+		 "mcspeed" => $_POST["mcspeed"],
+		 "lot_no"  =>   $_POST["lot_no"],
+		  "start_time"  =>   $_POST["start_time"],
+		  "end_time"  =>   $_POST["end_time"],
+		 "mat_no"  =>   $_POST["mat_no"],
+		  "band"  =>   $_POST["band"],
+		  "input_weight"  =>   $_POST["input_weight"],
+		  "output_weight"  =>   $_POST["output_weight"],
+		  "total_ream"  =>   $_POST["total_ream"],
+		  "total_reject"  =>   $_POST["total_reject"],
+		  "total_reject_percentage"  =>  $_POST["total_reject_percentage"],
+		  "roll_no1"  =>   $_POST["roll_no1"],
+		  "roll_no2"  =>   $_POST["roll_no2"],
+		  "roll_no3"  =>   $_POST["roll_no3"],
+		  "roll_no4"  =>   $_POST["roll_no4"],		 
+		  "roll_no5"  =>   $_POST["roll_no5"],
+		 "roll_grade1"  =>  $_POST["roll_grade1"],
+		  "roll_grade2"  =>   $_POST["roll_grade2"],
+		  "roll_grade3"  =>   $_POST["roll_grade3"],
+		 "roll_grade4"  =>   $_POST["roll_grade4"],
+		  "roll_grade5"  =>   $_POST["roll_grade5"],
+		  "roll_weight1"  =>   $_POST["roll_weight1"],
+		  "roll_weight2"  =>   $_POST["roll_weight2"],
+		  "roll_weight3"  =>   $_POST["roll_weight3"],
+		  "roll_weight4"  =>   $_POST["roll_weight4"],
+		 "roll_weight5"  =>  $_POST["roll_weight5"],
+		  "roll_f_g1"  =>   $_POST["roll_f_g_1"],
+		  "roll_f_g2"  =>   $_POST["roll_f_g_2"],
+		 "roll_f_g3"  =>   $_POST["roll_f_g_3"],
+		 "roll_f_g4"  =>   $_POST["roll_f_g_4"],
+		  "roll_f_g5"  =>  $_POST["roll_f_g_5"],
+		 "roll_joint1"  =>  $_POST["roll_joint1"],
+		  "roll_joint2"  =>   $_POST["roll_joint2"],
+		  "roll_joint3"  =>  $_POST["roll_joint3"],
+		  "roll_joint4"  =>   $_POST["roll_joint4"],
+		  "roll_joint5"  =>   $_POST["roll_joint5"],
+		  "problem_a"  =>  $_POST["problem_a"],
+		  "problem_b"  =>  $_POST["problem_b"],
+		  "problem_c"  =>   $_POST["problem_c"],
+		  "problem_d"  =>   $_POST["problem_d"],
+		  "problem_e"  => $_POST["problem_e"],
+		 "problem_f"  =>  $_POST["problem_f"],
+		  "problem_g"  =>  $_POST["problem_g"],
+		  "problem_h"  =>   $_POST["problem_h"],
+		  "problem_i"  =>  $_POST["problem_i"]
+		 );
+		$this->logsheet_model->logSheetUpdate($inData);
+		//echo '<Pre>';
+		// print_r($inData);
+		$count_prom =count($this->input->post('problem_id'));
+		for($i=0;$i<$count_prom;$i++){
+			$inData = array(
+				"cp_id" => $_POST["cp_id"][$i],
+				"problem_id"  =>   $_POST["problem_id"][$i],
+				"total_minutes"  =>  $_POST["downtime"][$i],
+				"problem_remark"  =>  $_POST["remark"][$i],
+				"c_id"  =>  $c_id,
+			);
+		$this->logsheet_model->cutSizePrombleUpdate($inData);
+		}
+
+		$inData = array(
+			"lcr_id"  =>  $this->input->post('lcr_id'),
+			"c_id"  =>  $c_id,
+			'size' => $this->input->post('size_finished'),
+			'ton' => $this->input->post('remark_ton'),
+			'total_fg' => $this->input->post('remark_total_fg'),
+			'grade1' => $this->input->post('remark_grade1'),
+			'mat1' => $this->input->post('remark_mat1'),
+			'ream1' => $this->input->post('remark_ream1'),
+			'weight1' => $this->input->post('remark_weight1'),
+			'grade2' => $this->input->post('remark_grade2'),
+			'mat2' => $this->input->post('remark_mat2'),
+			'ream2' => $this->input->post('remark_ream2'),
+			'weight2' => $this->input->post('remark_weight2'),
+			'grade3' => $this->input->post('remark_grade3'),
+			'mat3' => $this->input->post('remark_mat3'),
+			'ream3' => $this->input->post('remark_ream3'),
+			'weight3' => $this->input->post('remark_weight3'),
+			'head_shift' => $this->input->post('remark_head_shift'),
+			'employee1' => $this->input->post('remark_employee1'),
+			'employee2' => $this->input->post('remark_employee2'),
+			'employee3' => $this->input->post('remark_employee3'),
+			'em_ot1' => $this->input->post('remark_em_ot1'),
+			'em_ot2' => $this->input->post('remark_em_ot2'),
+			'em_ot3' => $this->input->post('remark_em_ot3'),
+			'customer_name' => $this->input->post('remark_customer'),
+			'mat_for_dmg1' => $this->input->post('remark_mat_dmg1'),
+			'mat_for_dmg2' => $this->input->post('remark_mat_dmg2'),
+			'mat_for_dmg3' => $this->input->post('remark_mat_dmg3'),
+			'mat_for_dmg4' => $this->input->post('remark_mat_dmg4'),
+			'remark' => $this->input->post('remark'),
+		);
+		$this->logsheet_model->cutSizeRemarkUpdate($inData);
+		//print_r($inData);
+		// exit();
 		redirect('logSheet/searchLog/'.$_POST["cut_size"].'/'.date('Y-m'));
 	}
 	public function insertReam(){
