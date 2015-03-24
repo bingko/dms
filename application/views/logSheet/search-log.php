@@ -183,14 +183,29 @@ if(isset($logSheet_set)){ ?>
 				}
 			?></h4>
       </div>
-      <?php if($this->uri->segment(3)==1||$this->uri->segment(3)==4){ ?>
+      
       <div class="modal-body">
+      <div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#summary" aria-controls="summary" role="tab" data-toggle="tab">Summary</a></li>
+    <li role="presentation"><a href="#problem" aria-controls="problem" role="tab" data-toggle="tab">Down Time</a></li>
+    <li role="presentation"><a href="#employee" aria-controls="employee" role="tab" data-toggle="tab">ผู้ควบคุมงาน</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="summary">
+    	
+      <?php if($this->uri->segment(3)==1||$this->uri->segment(3)==4){ ?>
         <div class="row">
         	<?php   $no=1; 
 					$sum_weight = 0;
 					$sum_ream = 0;
 					foreach($logSheet_set as $value_set){?>
         	<div class="col-lg-4" align="center">
+            
             <table class="table">
             <thead>
               <th colspan="2"><?php echo anchor('logSheet/edit_cutsize/'.$cutter.'/'.$datetime2->format('Y-m').'/'.$value_set['c_id'], 'Set '.$no ); ?></th>
@@ -245,9 +260,7 @@ if(isset($logSheet_set)){ ?>
             </table>
            </div>
         </div>
-      </div>
       <?php }elseif($this->uri->segment(3)==2||$this->uri->segment(3)==3){ ?>
-      <div class="modal-body">
         <div class="row">
         	<?php   $no=1; 
 					$total_input = 0;
@@ -312,10 +325,68 @@ if(isset($logSheet_set)){ ?>
             </table>
            </div>
         </div>
+        <?php } ?>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="problem">...</div>
+    <div role="tabpanel" class="tab-pane" id="employee">
+      <!------------------- EMPLOYEE  ------------------->
+    	<div class="row">
+    <div class="col-sm-12"><br /><br />
+
+          <div class="row">
+            <div class="col-sm-3" align="right"> <strong>หัวหน้ากะ</strong> </div>
+            <div class="col-sm-9">
+              <input type="text" class="form-control textbox" name="remark_head_shift" placeholder="">
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-sm-3" align="right"> Control </div>
+            <div class="col-sm-9">
+              <input type="text" class="form-control textbox" name="remark_employee1" placeholder="">
+            </div>
+          </div><br />
+			<div class="row">
+            <div class="col-sm-3" align="right"> Layboy </div>
+            <div class="col-sm-9">
+              <input type="text" class="form-control textbox" name="remark_employee2" placeholder="">
+            </div>
+          </div><br />
+            <div class="row">
+            <div class="col-sm-3" align="right">Overtime 1. </div>
+            <div class="col-sm-9">
+              <input type="text" class="form-control textbox" name="remark_em_ot1" placeholder="">
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-sm-3" align="right">Overtime  2. </div>
+            <div class="col-sm-9">
+              <input type="text" class="form-control textbox" name="remark_em_ot2" placeholder="Layboy">
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-sm-3" align="right"> <strong>คู่ธุรกิจ</strong> </div>
+            <div class="col-sm-9">
+              <input type="text" class="form-control textbox" name="remark_customer" placeholder="">
+            </div>
+          </div><br />
+          <div class="row">
+            <div class="col-sm-12" align="center"> <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button> </div>
+          </div>
+          
+          <br />
+        </div>
       </div>
-	  <?php }else{ ?>
+  <!------------------- END EMPLOYEE  ------------------->
+    </div>
+  </div>
+
+</div>
+
+      </div> 
       
-      <?php } ?>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>

@@ -276,12 +276,14 @@ class logSheet extends CI_Controller {
 		}
 	}
 	public function log_ream_report(){
+		$this->check_target();
 		$data['downtime']=$this->log_ream_model->getDownTime();
 		$data['page']='log_ream_report';
 		$this->load->view('index',$data);
 	}
 
 	public function log_cutsize_report(){
+		$this->check_target();
 		$data['page']='report/log_cutsize_report';
 		$data['cutsize']=$this->logsheet_cutsize_report->get_cutsize_log();
 		$data['downtime']=$this->logsheet_cutsize_report->get_problem_report();
@@ -294,6 +296,7 @@ class logSheet extends CI_Controller {
 		redirect('logSheet/log_cutsize_report/'.$cutter.'/'.$end_date);
 	}
 	public function log_folio_report(){
+		$this->check_target();
 		$data['page']='report/report-folio';
 		$data['cutsize']=$this->logsheet_folio_report->get_cutsize_log();
 		$data['downtime']=$this->logsheet_folio_report->get_problem_report();
@@ -305,7 +308,36 @@ class logSheet extends CI_Controller {
 		$end_date = $this->input->post('end_date');
 		redirect('logSheet/report-folio/'.$cutter.'/'.$end_date);
 	}
+	public function check_target()
+	{
+		$list_target = $this->setting_model->list_target();
 
+		if(empty($list_target)){
+			$date = new DateTime(date('Y-m'));
+			$date->sub(new DateInterval('P1M'));
+			$month =  $date->format('Y-m');
+			$target_lastMonth = $this->setting_model->list_target_lastMonth($month);
+			
+			//exit();
+			$target_name[0] = "Prod/Target (Cut Size)" ;
+			$target_name[1] = "Yiled Target (Cut Size)" ;
+			$target_name[2] = "Target Ton/Day (Folio)" ;
+			$target_name[3] = "M/C Running Target (Folio)" ;
+			$target_name[4] = "Target Pack/Day (REAM)" ;
+			$target_name[5] = "M/C Running Target (REAM)" ;
+			$target_name[6] = "DOWN TIME Target (REAM)" ;
+
+			for($i=0;$i<7;$i++){
+				$list_data = array(
+					'target_name' => $target_name[$i],
+					'target_date' => date('Y-m-d'), 
+					'target_value' => $target_lastMonth[$i]['target_value'], 
+					'target_type' => $target_lastMonth[$i]['target_type'],  
+				);
+			$this->setting_model->target_insert($list_data);
+			}
+		}
+	}
 
 	
 }
