@@ -286,11 +286,11 @@ class logSheet_cutsize extends CI_Controller {
 		for($i=0;$i<$count_set;$i++){
 			$inData = array(
 				"roll_a"  =>   $_POST["roll_a"][$i],
-				"softa"  =>  $_POST["softa"][$i],
+				"sorta"  =>  $_POST["sorta"][$i],
 				"roll_b"  =>   $_POST["roll_b"][$i],
-				"softb"  =>  $_POST["softb"][$i],
+				"sortb"  =>  $_POST["sortb"][$i],
 				"roll_c"  =>   $_POST["roll_c"][$i],
-				"softc"  =>  $_POST["softc"][$i],
+				"sortc"  =>  $_POST["sortc"][$i],
 				"f_id"  =>  $id,
 			);
 		$this->logsheet_model->folioSetInsert($inData);
