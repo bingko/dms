@@ -4,12 +4,14 @@ class setting extends CI_Controller {
 
 	public function set_problem()
 	{
-		$data['page'] = "attach_cutsize";
+		$data['cutter_type'] =  $this->uri->segment(3);
+		$data['page'] = "logSheet/setProblem";
 		$this->load->view('index',$data);
 	}
 	public function list_problem()
 	{
-		$list_user = $this->logsheet_model->get_problem();
+		$cutter_type =  $this->uri->segment(3);
+		$list_user = $this->logsheet_model->get_problem($cutter_type);
 		// echo "<Pre>";
 		// print_r($list_user);
 		// exit();
@@ -25,23 +27,16 @@ class setting extends CI_Controller {
 		$arr = json_decode($data);
 		foreach($arr as $name)
 		{
-			$cutter_type = $name->cutter_type ;
-			if($cutter_type == 0){
-				$cutter_type = 1 ;
-			}else{
-				$cutter_type = $name->cutter_type;
-			}
-
 			$list_data = array(
 				'problem_name' => $name->problem_name,
-				'cutter_type' => $cutter_type ,
+				'cutter_type' => $this->uri->segment(3),
 			);
 			$return = $this->logsheet_model->problem_insert($list_data);
 			$list_data = array(
 				'problem_name' => $name->problem_name,
-				'cutter_type' =>  $cutter_type ,
+				'cutter_type' => $this->uri->segment(3),
 			);
-	}
+		}
 		## Return Value ##
 		header('Content-Type: text/javascript; charset=utf8');
 		$json = '('.json_encode($list_data).')'; 
@@ -52,20 +47,11 @@ class setting extends CI_Controller {
 		$data = $_GET['models'];
 		$arr = json_decode($data);
 		foreach($arr as $name)
+		{
 
-		if(!isset($name->user_password)){
 			$list_data = array(
 				'problem_id' => $name->problem_id,
 				'problem_name' => $name->problem_name,
-				'cutter_type' => $name->cutter_type,
-			);
-			$return = $this->logsheet_model->problem_update($list_data);	
-		} 
-		else {
-			$list_data = array(
-				'problem_id' => $name->problem_id,
-				'problem_name' => $name->problem_name,
-				'cutter_type' => $name->cutter_type,
 			);
 			$return = $this->logsheet_model->problem_update($list_data);	
 		}
@@ -83,7 +69,7 @@ class setting extends CI_Controller {
 			foreach($arr as $name)
 			{
 				$list_data = array(
-				'user_id' => $name->user_id,
+				'problem_id' => $name->problem_id,
 			);
 				$this->logsheet_model->problem_delete($list_data);
 			}
