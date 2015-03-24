@@ -322,13 +322,13 @@
                     <strong>Total Input (kg)</strong>
                 </div>
                 <div class="col-sm-4">
-                    <input type="number" class="form-control textbox" name="total_input" placeholder="kg" value="<?php echo $detail_folio[0]['total_input']?>">
+                    <input type="number" class="form-control textbox" name="total_input" placeholder="kg" value="<?php echo $detail_folio[0]['total_input']?>" readonly>
                 </div>
                 <div class="col-sm-2" align="right">
                     <strong>Trim reject (kg) </strong>
                 </div>
                 <div class="col-sm-4">
-                    <input type="number" class="form-control textbox" name="trim_reject" placeholder="kg" value="<?php echo $detail_folio[0]['trim_reject']?>">
+                    <input type="number" class="form-control textbox" name="trim_reject" placeholder="kg" value="<?php echo $detail_folio[0]['trim_reject']?>" readonly>
                 </div>
             </div><br />
 		<div class="row">
@@ -336,13 +336,13 @@
                     <strong>Reject (kg)</strong>
                 </div>
                 <div class="col-sm-4">
-                    <input type="number" class="form-control textbox" name="reject" placeholder="kg" value="<?php echo $detail_folio[0]['reject']?>">
+                    <input type="number" class="form-control textbox" name="reject" placeholder="kg" value="<?php echo $detail_folio[0]['reject']?>" readonly>
                 </div>
                 <div class="col-sm-2" align="right">
                     <strong>Total reject (kg) </strong>
                 </div>
                 <div class="col-sm-4">
-                    <input type="number" class="form-control textbox" name="total_reject" placeholder="kg" value="<?php echo $detail_folio[0]['total_reject']?>">
+                    <input type="number" class="form-control textbox" name="total_reject" placeholder="kg" value="<?php echo $detail_folio[0]['total_reject']?>" readonly>
                 </div>
             </div><br />
             <div class="row">
@@ -350,7 +350,7 @@
                     <strong>Output (kg)</strong>
                 </div>
                 <div class="col-sm-4">
-                    <input type="number" class="form-control textbox" name="output" placeholder="kg" value="<?php echo $detail_folio[0]['output']?>">
+                    <input type="number" class="form-control textbox" name="output" placeholder="kg" value="<?php echo $detail_folio[0]['output']?>" readonly>
                 </div>
                 <div class="col-sm-2" align="right">
                     <strong>จำนวนรีมที่ตัดได้</strong>
@@ -365,19 +365,19 @@
                     <strong>Soft</strong>
                 </div>
                 <div class="col-sm-2">
-                    <input type="number" class="form-control textbox" name="soft" placeholder="pallet" value="<?php echo $detail_folio[0]['soft']?>">
+                    <input type="number" class="form-control textbox" name="soft" placeholder="pallet" value="<?php echo $detail_folio[0]['soft']?>" readonly>
                 </div>
                 <div class="col-sm-2" align="right">
                     <strong> No Soft </strong>
                 </div>
                 <div class="col-sm-2">
-                    <input type="number" class="form-control textbox" name="nosoft" placeholder="pallet" value="<?php echo $detail_folio[0]['nosoft']?>">
+                    <input type="number" class="form-control textbox" name="nosoft" placeholder="pallet" value="<?php echo $detail_folio[0]['nosoft']?>" readonly>
                 </div>
                 <div class="col-sm-2" align="right">
                     <strong> N/C </strong>
                 </div>
                 <div class="col-sm-2">
-                    <input type="number" class="form-control textbox" name="nc" placeholder="pallet" value="<?php echo $detail_folio[0]['nc']?>">
+                    <input type="number" class="form-control textbox" name="nc" placeholder="pallet" value="<?php echo $detail_folio[0]['nc']?>" readonly>
                 </div>
             </div>
 
@@ -729,3 +729,4 @@
 		border-bottom: 1px dotted ;
 	  }
 </style>
+<script src="<?php echo base_url()?>assets/js/setformfolio.js"></script>

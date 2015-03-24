@@ -487,5 +487,4 @@
 		border-bottom: 1px dotted ;
 	  }
 </style>
-
     <script src="<?php echo base_url()?>assets/js/setform.js"></script>
