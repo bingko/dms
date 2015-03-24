@@ -43,6 +43,10 @@
 					"value": "4","text": "สรุปผลตัด"
 				},{
 					"value": "5","text": "Log Sheet"
+				},{
+					"value": "6","text": "หัวหน้ากะ"
+				},{
+					"value": "7","text": "พนักงานเดินเครื่อง"
 				}];
 
                 $(document).ready(function () {

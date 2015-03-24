@@ -50,28 +50,6 @@
                     if($session['user_level']==1||$session['user_level']==4){
                 ?>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo5"><i class="fa fa-file-text-o"></i> สรุปผลตัด  <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo5" class="collapse">
-                            <li>
-                                <a href="<?php echo site_url('home/search_cutsize/1')?>"> Cut Size 1</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo site_url('home/search_cutsize/4')?>"> Cut Size 4</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo site_url('home/search_cutsize/2')?>"> Folio 1</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo site_url('home/search_cutsize/3')?>"> Folio 2</a>
-                            </li>   
-
-                        </ul>
-                    </li>
-                <?php 
-                    }
-                    if($session['user_level']==1||$session['user_level']==4){
-                ?>
-                    <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo3"><i class="fa fa-th-large"></i> Log Sheet  <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo3" class="collapse">
                             <li>
@@ -108,25 +86,47 @@
                     </li>
                 <?php 
                     }
+                    if($session['user_level']==1||$session['user_level']==4){
+                ?>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo5"><i class="fa fa-file-text-o"></i> สรุปผลตัด  <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo5" class="collapse">
+                            <li>
+                                <a href="<?php echo site_url('home/search_cutsize/1')?>"> Cut Size 1</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo site_url('home/search_cutsize/4')?>"> Cut Size 4</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo site_url('home/search_cutsize/2')?>"> Folio 1</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo site_url('home/search_cutsize/3')?>"> Folio 2</a>
+                            </li>   
+
+                        </ul>
+                    </li>
+                <?php 
+                    }
                     if($session['user_level']==1||$session['user_level']==5){
                 ?>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo4"><i class="fa fa-area-chart"></i> Report  <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo4" class="collapse">
                             <li>
-                                <a href="<?php echo site_url('logSheet/searchLog/1').'/'.date('Y-m')?>"> Cut Size 1</a>
+                                <a href="<?php echo site_url('logSheet/log_cutsize_report/1').'/'.date('Y-m')?>"> Cut Size 1</a>
                             </li>
                             <li>
-                                <a href="<?php echo site_url('logSheet/searchLog/4').'/'.date('Y-m')?>"> Cut Size 4</a>
+                                <a href="<?php echo site_url('logSheet/log_cutsize_report/4').'/'.date('Y-m')?>"> Cut Size 4</a>
                             </li>
                             <li>
-                                <a href="<?php echo site_url('logSheet/searchLog/2').'/'.date('Y-m')?>"> Folio 1</a>
+                                <a href="<?php echo site_url('logSheet/log_folio_report/2').'/'.date('Y-m')?>"> Folio 1</a>
                             </li>
                             <li>
-                                <a href="<?php echo site_url('logSheet/searchLog/3').'/'.date('Y-m')?>"> Folio 2</a>
+                                <a href="<?php echo site_url('logSheet/log_folio_report/3').'/'.date('Y-m')?>"> Folio 2</a>
                             </li>   
                             <li>
-                                <a href="<?php echo site_url('logSheet/searchLog/5').'/'.date('Y-m')?>"> Ream </a>
+                                <a href="<?php echo site_url('logSheet/log_ream_report/5').'/'.date('Y-m')?>"> Ream </a>
                             </li>  
 
                         </ul>

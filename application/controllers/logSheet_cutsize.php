@@ -227,6 +227,212 @@ class logSheet_cutsize extends CI_Controller {
 		// exit();
 		redirect('logSheet/searchLog/'.$_POST["cut_size"].'/'.date('Y-m'));
 	}
+	public function add_input_folio()
+	{
+
+		$inData = array(
+			'cutter' => $this->input->post('cut_size'),
+			'date' => $this->input->post('date'),
+			'shift' => $this->input->post('shift'),
+			'grade' => $this->input->post('grade'),
+			'order' => $this->input->post('order'),
+			'item' => $this->input->post('item'),
+			'width' => $this->input->post('width'),
+			'lot' => $this->input->post('lot'),
+			'size' => $this->input->post('size'),
+			'rh' => $this->input->post('rh'),
+			'mat' => $this->input->post('mat'),
+			'start_time' => $this->input->post('start_time'),
+			'stop_time' => $this->input->post('stop_time'),
+			'act' => $this->input->post('act'),
+			'temp' => $this->input->post('temp'),
+			'total_input' => $this->input->post('total_input'),
+			'trim_reject' => $this->input->post('trim_reject'),
+			'reject' => $this->input->post('reject'),
+			'total_reject' => $this->input->post('total_reject'),
+			'output' => $this->input->post('output'),
+			'ream' => $this->input->post('ream'),
+			'soft' => $this->input->post('soft'),
+			'nosoft' => $this->input->post('nosoft'),
+			'nc' => $this->input->post('nc'),
+			'proble_remark' => $this->input->post('proble_remark'),
+		 );
+		$id = $this->logsheet_model->folioInsert($inData);
+
+		$count_prom =count($this->input->post('problem_id'));
+		for($i=0;$i<$count_prom;$i++){
+			$inData = array(
+				"problem_id"  =>   $_POST["problem_id"][$i],
+				"min"  =>  $_POST["downtime"][$i],
+				"problem_from"  =>  $_POST["from"][$i],
+				"problem_to"  =>  $_POST["to"][$i],
+				"f_id"  =>  $id,
+			);
+		$this->logsheet_model->folioPrombleInsert($inData);
+		}
+
+		$count_reel =count($this->input->post('reel_no'));
+		for($i=0;$i<$count_reel;$i++){
+			$inData = array(
+				"reel_no"  =>   $_POST["reel_no"][$i],
+				"reel_weight"  =>  $_POST["reel_weight"][$i],
+				"reel_roll"  =>  $_POST["reel_roll"][$i],
+				"f_id"  =>  $id,
+			);
+		$this->logsheet_model->folioReelInsert($inData);
+		}
+
+		$count_set =count($this->input->post('roll_a'));
+		for($i=0;$i<$count_set;$i++){
+			$inData = array(
+				"roll_a"  =>   $_POST["roll_a"][$i],
+				"softa"  =>  $_POST["softa"][$i],
+				"roll_b"  =>   $_POST["roll_b"][$i],
+				"softb"  =>  $_POST["softb"][$i],
+				"roll_c"  =>   $_POST["roll_c"][$i],
+				"softc"  =>  $_POST["softc"][$i],
+				"f_id"  =>  $id,
+			);
+		$this->logsheet_model->folioSetInsert($inData);
+		}
+
+		$inData = array(
+			"f_id"  =>  $id,
+			'remark_soft' => $this->input->post('remark_soft'),
+			'remark_nosoft' => $this->input->post('remark_nosoft'),
+			'remark_nc' => $this->input->post('remark_nc'),
+			'remark_grade1' => $this->input->post('remark_grade1'),
+			'remark_size1' => $this->input->post('remark_size1'),
+			'remark_totalinput1' => $this->input->post('remark_totalinput1'),
+			'remark_totaloutput1' => $this->input->post('remark_totaloutput1'),
+			'remark_totalream1' => $this->input->post('remark_totalream1'),
+			'remark_grade2' => $this->input->post('remark_grade2'),
+			'remark_size2' => $this->input->post('remark_size2'),
+			'remark_totalinput2' => $this->input->post('remark_totalinput2'),
+			'remark_totaloutput2' => $this->input->post('remark_totaloutput2'),
+			'remark_totalream2' => $this->input->post('remark_totalream2'),
+			'remark_grade3' => $this->input->post('remark_grade3'),
+			'remark_size3' => $this->input->post('remark_size3'),
+			'remark_totalinput3' => $this->input->post('remark_totalinput3'),
+			'remark_totaloutput3' => $this->input->post('remark_totaloutput3'),
+			'remark_totalream3' => $this->input->post('remark_totalream3'),
+			'remark_employee1' => $this->input->post('remark_employee1'),
+			'remark_employee2' => $this->input->post('remark_employee2'),
+			'remark_em_ot1' => $this->input->post('remark_em_ot1'),
+			'remark_em_ot2' => $this->input->post('remark_em_ot2'),
+			'remark_customer' => $this->input->post('remark_customer'),
+			'remark_total_input' => $this->input->post('remark_total_input'),
+			'remark_total_output' => $this->input->post('remark_total_output'),
+			'remark_total_ream' => $this->input->post('remark_total_ream'),
+			'remark_head_shift' => $this->input->post('remark_head_shift'),
+		);
+		$this->logsheet_model->folioRemarkInsert($inData);
+		redirect('logSheet/searchLog/'.$_POST["cut_size"].'/'.date('Y-m'));
+	}
+	public function edit_input_folio()
+	{
+		$id = $this->input->post('f_id');
+		$inData = array(
+			'f_id' => $this->input->post('f_id'),
+			'cutter' => $this->input->post('cut_size'),
+			'date' => $this->input->post('date'),
+			'shift' => $this->input->post('shift'),
+			'grade' => $this->input->post('grade'),
+			'order' => $this->input->post('order'),
+			'item' => $this->input->post('item'),
+			'width' => $this->input->post('width'),
+			'lot' => $this->input->post('lot'),
+			'size' => $this->input->post('size'),
+			'rh' => $this->input->post('rh'),
+			'mat' => $this->input->post('mat'),
+			'start_time' => $this->input->post('start_time'),
+			'stop_time' => $this->input->post('stop_time'),
+			'act' => $this->input->post('act'),
+			'temp' => $this->input->post('temp'),
+			'total_input' => $this->input->post('total_input'),
+			'trim_reject' => $this->input->post('trim_reject'),
+			'reject' => $this->input->post('reject'),
+			'total_reject' => $this->input->post('total_reject'),
+			'output' => $this->input->post('output'),
+			'ream' => $this->input->post('ream'),
+			'soft' => $this->input->post('soft'),
+			'nosoft' => $this->input->post('nosoft'),
+			'nc' => $this->input->post('nc'),
+			'proble_remark' => $this->input->post('proble_remark'),
+		 );
+		$this->logsheet_model->folioUpdate($inData);
+/*
+		$count_prom =count($this->input->post('problem_id'));
+		for($i=0;$i<$count_prom;$i++){
+			$inData = array(
+				"cp_id"  =>   $_POST["cp_id"][$i],
+				"min"  =>  $_POST["downtime"][$i],
+				"problem_from"  =>  $_POST["from"][$i],
+				"problem_to"  =>  $_POST["to"][$i],
+				"f_id"  =>  $id,
+			);
+		$this->logsheet_model->folioPrombleInsert($inData);
+		}
+
+		$count_reel =count($this->input->post('reel_no'));
+		for($i=0;$i<$count_reel;$i++){
+			$inData = array(
+				"reel_no"  =>   $_POST["reel_no"][$i],
+				"reel_weight"  =>  $_POST["reel_weight"][$i],
+				"reel_roll"  =>  $_POST["reel_roll"][$i],
+				"f_id"  =>  $id,
+			);
+		$this->logsheet_model->folioReelInsert($inData);
+		}
+
+		$count_set =count($this->input->post('roll_a'));
+		for($i=0;$i<$count_set;$i++){
+			$inData = array(
+				"roll_a"  =>   $_POST["roll_a"][$i],
+				"softa"  =>  $_POST["softa"][$i],
+				"roll_b"  =>   $_POST["roll_b"][$i],
+				"softb"  =>  $_POST["softb"][$i],
+				"roll_c"  =>   $_POST["roll_c"][$i],
+				"softc"  =>  $_POST["softc"][$i],
+				"f_id"  =>  $id,
+			);
+		$this->logsheet_model->folioSetInsert($inData);
+		}
+*/
+		$inData = array(
+			"lfr_id" => $this->input->post('lfr_id'),
+			"f_id"  =>  $id,
+			'remark_soft' => $this->input->post('remark_soft'),
+			'remark_nosoft' => $this->input->post('remark_nosoft'),
+			'remark_nc' => $this->input->post('remark_nc'),
+			'remark_grade1' => $this->input->post('remark_grade1'),
+			'remark_size1' => $this->input->post('remark_size1'),
+			'remark_totalinput1' => $this->input->post('remark_totalinput1'),
+			'remark_totaloutput1' => $this->input->post('remark_totaloutput1'),
+			'remark_totalream1' => $this->input->post('remark_totalream1'),
+			'remark_grade2' => $this->input->post('remark_grade2'),
+			'remark_size2' => $this->input->post('remark_size2'),
+			'remark_totalinput2' => $this->input->post('remark_totalinput2'),
+			'remark_totaloutput2' => $this->input->post('remark_totaloutput2'),
+			'remark_totalream2' => $this->input->post('remark_totalream2'),
+			'remark_grade3' => $this->input->post('remark_grade3'),
+			'remark_size3' => $this->input->post('remark_size3'),
+			'remark_totalinput3' => $this->input->post('remark_totalinput3'),
+			'remark_totaloutput3' => $this->input->post('remark_totaloutput3'),
+			'remark_totalream3' => $this->input->post('remark_totalream3'),
+			'remark_employee1' => $this->input->post('remark_employee1'),
+			'remark_employee2' => $this->input->post('remark_employee2'),
+			'remark_em_ot1' => $this->input->post('remark_em_ot1'),
+			'remark_em_ot2' => $this->input->post('remark_em_ot2'),
+			'remark_customer' => $this->input->post('remark_customer'),
+			'remark_total_input' => $this->input->post('remark_total_input'),
+			'remark_total_output' => $this->input->post('remark_total_output'),
+			'remark_total_ream' => $this->input->post('remark_total_ream'),
+			'remark_head_shift' => $this->input->post('remark_head_shift'),
+		);
+		$this->logsheet_model->folioRemarkUpdate($inData);
+		redirect('logSheet/searchLog/'.$_POST["cut_size"].'/'.date('Y-m'));
+	}
 	public function insertReam(){
 		$logream=array('date'=>date('Y-m-d H:i:s'),'shift'=>3);
 		$this->log_ream_model->insert_log_ream($logream);

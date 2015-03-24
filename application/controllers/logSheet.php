@@ -17,7 +17,13 @@ class logSheet extends CI_Controller {
 			'shift' => $this->uri->segment(5),
 			'date' => $this->uri->segment(6),
 			);
-		$data['logSheet_set'] = $this->logsheet_model->getLogSheet_shift($InData);
+		if($data['cutter']==1||$data['cutter']==4){
+		$data['logSheet_set'] = $this->logsheet_model->getLogSheet_cutsize_shift($InData);
+		}elseif($data['cutter']==2||$data['cutter']==3){
+		$data['logSheet_set'] = $this->logsheet_model->getLogSheet_folio_shift($InData);
+		}else{
+		$data['logSheet_set'] = $this->logsheet_model->getLogSheet_ream_shift($InData);
+		}
 
  		$data['page'] = "logSheet/search-log";
 		$this->load->view('index',$data);
@@ -40,14 +46,16 @@ class logSheet extends CI_Controller {
 	public function input_cutsize()
 	{
 		$cutter = $this->uri->segment(3);
-		$data['get_problem'] = $this->logsheet_model->get_problem($cutter);
+		$cutter_type = 1;
+		$data['get_problem'] = $this->logsheet_model->get_problem($cutter_type);
 		$data['cutter'] = $cutter ;
 		$data['page'] = "logSheet/formCutSite";
 		$this->load->view('index',$data);
 	}
 	public function edit_cutsize()
 	{
-		echo $c_id  = $this->uri->segment(5);
+		$c_id  = $this->uri->segment(5);
+		$cutter_type = 1;
 		$data['detail_CutSite'] = $this->logsheet_model->getLogSheet_set_detail($c_id);
 		$data['detail_problem'] = $this->logsheet_model->getLogSheet_problem_detail($c_id);
 		$data['detail_remark'] = $this->logsheet_model->getLogSheet_remark_detail($c_id);
@@ -56,17 +64,37 @@ class logSheet extends CI_Controller {
 		// exit();
 		$cutter = $this->uri->segment(3);
 		$data['cutter'] = $this->uri->segment(3);
-		$data['get_problem'] = $this->logsheet_model->get_problem($cutter);
+		$data['get_problem'] = $this->logsheet_model->get_problem($cutter_type);
 		
 		$data['page'] = "logSheet/formCutSite_edit";
 		$this->load->view('index',$data);
 	}
 	public function input_folio()
 	{
+		$cutter = $this->uri->segment(3);
+		$cutter_type = 2;
+		$data['get_problem'] = $this->logsheet_model->get_problem($cutter_type);
+		$data['cutter'] = $cutter ;
+		$data['page'] = "logSheet/formFolio";
+		$this->load->view('index',$data);
+	}
+	public function edit_folio()
+	{
+		$f_id  = $this->uri->segment(5);
+		$cutter_type = 2;
+		$data['detail_folio'] = $this->logsheet_model->getLogSheet_folio_detail($f_id);
+		$data['detail_problem'] = $this->logsheet_model->getLogSheet_folio_problem_detail($f_id);
+		$data['detail_remark'] = $this->logsheet_model->getLogSheet_folio_remark_detail($f_id);
+		$data['detail_reel'] = $this->logsheet_model->getLogSheet_folio_reel_detail($f_id);
+		$data['detail_set'] = $this->logsheet_model->getLogSheet_folio_set_detail($f_id);
+		// echo "<pre>";
+		// print_r($data);
+		// exit();
+		$cutter = $this->uri->segment(3);
 		$data['cutter'] = $this->uri->segment(3);
-		$data['data'] = $this->uri->segment(4);
-		$data['Shift_q'] = $this->uri->segment(5);
-		$data['page'] = "logSheet/formCutSite1";
+		$data['get_problem'] = $this->logsheet_model->get_problem($cutter_type);
+		
+		$data['page'] = "logSheet/formFolio_edit";
 		$this->load->view('index',$data);
 	}
 	public function input_ream()
@@ -252,6 +280,32 @@ class logSheet extends CI_Controller {
 		$data['page']='log_ream_report';
 		$this->load->view('index',$data);
 	}
+
+	public function log_cutsize_report(){
+		$data['page']='report/log_cutsize_report';
+		$data['cutsize']=$this->logsheet_cutsize_report->get_cutsize_log();
+		$data['downtime']=$this->logsheet_cutsize_report->get_problem_report();
+		$this->load->view('index',$data);
+	}
+	public function searchCutSizeLog()
+	{
+		$cutter = $this->input->post('cutter');
+		$end_date = $this->input->post('end_date');
+		redirect('logSheet/log_cutsize_report/'.$cutter.'/'.$end_date);
+	}
+	public function log_folio_report(){
+		$data['page']='report/report-folio';
+		$data['cutsize']=$this->logsheet_folio_report->get_cutsize_log();
+		$data['downtime']=$this->logsheet_folio_report->get_problem_report();
+		$this->load->view('index',$data);
+	}
+	public function searchfolioLog()
+	{
+		$cutter = $this->input->post('cutter');
+		$end_date = $this->input->post('end_date');
+		redirect('logSheet/report-folio/'.$cutter.'/'.$end_date);
+	}
+
 
 	
 }
