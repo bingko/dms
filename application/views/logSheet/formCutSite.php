@@ -48,7 +48,7 @@
             <tr width=100>
               <td height="50" align="right"><label for="exampleInputName2">เกรด/แกรม</label>
                 &nbsp;&nbsp; </td>
-              <td height="50" align="center"><select  name="grade_gram" class="form-control textbox">
+              <td height="50" align="center"><select  name="grade_gram" class="form-control textbox" onchange="setOutPut()">
                   <option value='PPC-64'>PPC-64</option>
                   <option value-'PPC-70'>PPC-70</option>
                   <option value='PPC-75'>PPC-75</option>
@@ -67,7 +67,7 @@
               <td height="50" align="center"><input type="text" class="form-control textbox"  name="lot_no" placeholder="Lot No."></td>
               <td height="50" align="right"><label for="exampleInputName2">Size</label>
                 &nbsp;&nbsp; </td>
-              <td height="50" align="center"><select  name="size" class="form-control textbox">
+              <td height="50" align="center"><select  name="size" class="form-control textbox" onchange="setOutPut()">
                   <option value='A4'>A4</option>
                   <option value-'A3'>A3</option>
                   <option value='B4'>B4</option>
@@ -163,7 +163,7 @@
             <tr>
               <td height="50" align="right"><label for="exampleInputName2">Total </label>
                 &nbsp;&nbsp; </td>
-              <td height="50" align="center"><input type="text" class="form-control textbox" name="total_ream" placeholder="Total Ream"></td>
+              <td height="50" align="center"><input type="text" class="form-control textbox" name="total_ream" placeholder="Total Ream" onkeypress="setOutPut()"></td>
               <td height="50" align="right"><label for="exampleInputName2">Total Reject</label>
                 &nbsp;&nbsp; </td>
               <td height="50" align="center"><input type="text" class="form-control textbox" name="total_reject" placeholder="Total Reject"></td>
@@ -487,3 +487,4 @@
 		border-bottom: 1px dotted ;
 	  }
 </style>
+    <script src="<?php echo base_url()?>assets/js/setform.js"></script>

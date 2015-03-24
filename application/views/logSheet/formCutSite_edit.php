@@ -51,7 +51,7 @@
             <tr width=100>
               <td height="50" align="right"><label for="exampleInputName2">เกรด/แกรม</label>
                 &nbsp;&nbsp; </td>
-              <td height="50" align="center"><select  name="grade_gram" class="form-control textbox">
+              <td height="50" align="center"><select  name="grade_gram" id="" class="form-control textbox">
                   <option value='<?php echo $detail_CutSite[0]['grade_gram'] ?>'><?php echo $detail_CutSite[0]['grade_gram'] ?></option>
                   <option value='PPC-64'>PPC-64</option>
                   <option value-'PPC-70'>PPC-70</option>
@@ -559,3 +559,5 @@
 		border-bottom: 1px dotted ;
 	  }
 </style>
+
+    <script src="<?php echo base_url()?>assets/js/setform.js"></script>

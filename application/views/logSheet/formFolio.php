@@ -141,7 +141,7 @@
               </div>
             </div>
             <div class="col-sm-6">
-              <table width="100%"  class="table table-hover table-striped">
+              <table width="100%"  class="table table-hover table-striped" id="sortdetail">
                 <thead>
                   <tr>
                     <th height="50" width="10%"> <div align="center"> Set NO. </div>
@@ -197,29 +197,29 @@
           <div class="row">
             <div class="col-sm-2" align="right"> <strong>Total Input (kg)</strong> </div>
             <div class="col-sm-4">
-              <input type="number" class="form-control textbox" name="total_input" placeholder="kg">
+              <input type="number" class="form-control textbox" name="total_input" placeholder="kg" readonly>
             </div>
             <div class="col-sm-2" align="right"> <strong>Trim reject (kg) </strong> </div>
             <div class="col-sm-4">
-              <input type="number" class="form-control textbox" name="trim_reject" placeholder="kg">
+              <input type="number" class="form-control textbox" name="trim_reject" placeholder="kg" readonly>
             </div>
           </div>
           <br />
           <div class="row">
             <div class="col-sm-2" align="right"> <strong>Reject (kg)</strong> </div>
             <div class="col-sm-4">
-              <input type="number" class="form-control textbox" name="reject" placeholder="kg">
+              <input type="number" class="form-control textbox" name="reject" placeholder="kg" readonly>
             </div>
             <div class="col-sm-2" align="right"> <strong>Total reject (kg) </strong> </div>
             <div class="col-sm-4">
-              <input type="number" class="form-control textbox" name="total_reject" placeholder="kg">
+              <input type="number" class="form-control textbox" name="total_reject" placeholder="kg" readonly>
             </div>
           </div>
           <br />
           <div class="row">
             <div class="col-sm-2" align="right"> <strong>Output (kg)</strong> </div>
             <div class="col-sm-4">
-              <input type="number" class="form-control textbox" name="output" placeholder="kg">
+              <input type="number" class="form-control textbox" name="output" placeholder="kg" readonly>
             </div>
             <div class="col-sm-2" align="right"> <strong>จำนวนรีมที่ตัดได้</strong> </div>
             <div class="col-sm-4">
@@ -230,15 +230,15 @@
           <div class="row">
             <div class="col-sm-2" align="right"> <strong>Sort</strong> </div>
             <div class="col-sm-2">
-              <input type="number" class="form-control textbox" name="sort" placeholder="Ream">
+              <input type="number" class="form-control textbox" name="sort" placeholder="Ream" readonly>
             </div>
             <div class="col-sm-2" align="right"> <strong> No Sort </strong> </div>
             <div class="col-sm-2">
-              <input type="number" class="form-control textbox" name="nosort" placeholder="Ream">
+              <input type="number" class="form-control textbox" name="nosort" placeholder="Ream" readonly>
             </div>
             <div class="col-sm-2" align="right"> <strong> N/C </strong> </div>
             <div class="col-sm-2">
-              <input type="number" class="form-control textbox" name="nc" placeholder="Ream">
+              <input type="number" class="form-control textbox" name="nc" placeholder="Ream" readonly>
             </div>
           </div>
         </div>
@@ -499,3 +499,4 @@
 	  }
 	  
 </style>
+    <script src="<?php echo base_url()?>assets/js/setformfolio.js"></script>

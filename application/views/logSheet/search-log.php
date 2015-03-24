@@ -49,8 +49,6 @@
 				<div id="date">
 					<div class="row">
 						<div class="col-sm-12"  align="right"> 
-
-
                                 	<input type="hidden" name="cutter" value="<?php echo $this->uri->segment(3);?>" />
 									<input type="date" id="monthpicker" value="<?php echo $this->uri->segment(4);?>" class="form-control end" name="end_date" onchange="this.form.submit()"/>
 

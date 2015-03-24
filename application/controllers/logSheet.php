@@ -281,7 +281,6 @@ class logSheet extends CI_Controller {
 		$data['page']='log_ream_report';
 		$this->load->view('index',$data);
 	}
-
 	public function log_cutsize_report(){
 		$this->check_target();
 		$data['page']='report/log_cutsize_report';

@@ -23,7 +23,7 @@
 		vertical-align:middle;
 	}
 
-</style>
+</style
 <div class="row">
 	<div class="col-lg-12">
 			<div class="jumbotron" align="center" style="padding-top: 15px;padding-bottom: 20px; ">
@@ -124,7 +124,7 @@
             <script>
 			$(document).ready(function(){
 			var value=<?php echo $this->logsheet_cutsize_report->get_cutsize_log_chart()?>;
-			var value2=$.map(<?php echo $this->logsheet_cutsize_report->get_cutsize_problem_chart()?>, function(value, index) { return [value.total];});
+			var total_donwtime=<?php echo $this->logsheet_cutsize_report->get_cutsize_problem_chart()?>;
 			var value3=$.map(<?php echo $this->logsheet_cutsize_report->get_cutsize_problem_chart()?>, function(value, index) { return [value.problem_name];});
 			var serie = function(){
 				var a=[];
@@ -204,7 +204,7 @@
                 },
                 series: [{
                     name: "Output",
-                    data: value2
+                    data: $.map(total_donwtime, function(value, index) { return [value.total];});
                 }],
                 valueAxis: {
                     labels: {
