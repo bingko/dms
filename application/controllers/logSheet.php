@@ -253,6 +253,18 @@ class logSheet extends CI_Controller {
 		$data['page']='log_ream_report';
 		$this->load->view('index',$data);
 	}
+	public function log_cutsize_report(){
+		$data['page']='report/log_cutsize_report';
+		$data['cutsize']=$this->logsheet_cutsize_report->get_cutsize_log();
+		$data['downtime']=$this->logsheet_cutsize_report->get_problem_report();
+		$this->load->view('index',$data);
+	}
+	public function searchCutSizeLog()
+	{
+		$cutter = $this->input->post('cutter');
+		$end_date = $this->input->post('end_date');
+		redirect('logSheet/log_cutsize_report/'.$cutter.'/'.$end_date);
+	}
 
 	
 }
