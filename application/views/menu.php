@@ -1,5 +1,8 @@
        <?php 
             $session = $this->session->userdata('user_data');
+            if(empty($session)){
+                redirect('login/index');
+            }
         ?>
            <?php $uri = $this->uri->segment(2); ?>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -128,6 +131,9 @@
                             <li>
                                 <a href="<?php echo site_url('logSheet/log_ream_report/5').'/'.date('Y-m')?>"> Ream </a>
                             </li>  
+                            <li>
+                                <a href="<?php echo site_url('report/setting_report')?>"> กำหนด Target </a>
+                            </li>
 
                         </ul>
                     </li>
