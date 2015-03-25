@@ -200,7 +200,9 @@
             <tr> 
                 <td height="50" align="right">    <?php echo $j+1?> &nbsp;&nbsp;:&nbsp;&nbsp; </td>
                  <?php if(isset($detail_reel[$j]['reel_no'])){ ?>
-                <td height="50" align="center">    <input type="text" class="form-control textbox" name="reel_no[]" placeholder="" value="<?php echo $detail_reel[$j]['reel_no']?>">  </td>
+                <td height="50" align="center">    
+                <input type="hidden"name="lfr_id[]" placeholder="" value="<?php echo $detail_reel[$j]['lfr_id']?>">
+                <input type="text" class="form-control textbox" name="reel_no[]" placeholder="" value="<?php echo $detail_reel[$j]['reel_no']?>">  </td>
                 <td height="50" align="right">   <input type="text" class="form-control textbox" name="reel_weight[]" placeholder="" value="<?php echo $detail_reel[$j]['reel_weight']?>">  </td>
                 <td height="50" align="center">    <input type="text" class="form-control textbox" name="reel_roll[]" placeholder="G/F " value="<?php echo $detail_reel[$j]['reel_roll']?>">  </td>
                 <?php }else{ ?>
@@ -231,70 +233,72 @@
             <tr> 
                 <td height="50" align="center" width="10%">    <?php echo $i+1?> </td>
                 <?php if(!isset($detail_set[$i]['problem_id'])){ ?>
-                <td height="50" align="center"  width="15%">    <select class="form-control textbox" name="softa[]">
-                									<option value="<?php echo $detail_set[$i]['softa'] ?>">
-                                                    <?php 	if($detail_set[$i]['softa']==1){
-																echo "soft";
-													}elseif($detail_set[$i]['softa']==2){
-														echo "no soft";
+                <td height="50" align="center"  width="15%">    
+                									<input type="hidden" name="lfs_id[]" placeholder="" value="<?php echo $detail_set[$i]['lfs_id'] ?>">
+                                                    <select class="form-control textbox select" name="sorta[]">
+                									<option value="<?php echo $detail_set[$i]['sorta'] ?>">
+                                                    <?php 	if($detail_set[$i]['sorta']==1){
+																echo "S";
+													}elseif($detail_set[$i]['sorta']==2){
+														echo "N";
 													}else{
 														echo "N/C";
 													}
 													?>
                                                     </option>
-                                                    <option value="1">soft</option>
-                                                    <option value="2">no soft</option>
+                                                    <option value="1">S</option>
+                                                    <option value="2">N</option>
                                                     <option value="3">N/C</option>
                                                     </select>  </td> 
                 <td height="50" align="center"  width="15%">    <input type="text" class="form-control textbox" name="roll_a[]" placeholder="" value="<?php echo $detail_set[$i]['roll_a'] ?>">  </td> 
-                <td height="50" align="center"  width="15%">    <select class="form-control textbox" name="softb[]">
-                									<option value="<?php echo $detail_set[$i]['softb'] ?>">
-                                                    <?php 	if($detail_set[$i]['softb']==1){
-																echo "soft";
-													}elseif($detail_set[$i]['softb']==2){
-														echo "no soft";
+                <td height="50" align="center"  width="15%">    <select class="form-control textbox select" name="sortb[]">
+                									<option value="<?php echo $detail_set[$i]['sortb'] ?>">
+                                                    <?php 	if($detail_set[$i]['sortb']==1){
+																echo "S";
+													}elseif($detail_set[$i]['sortb']==2){
+														echo "N";
 													}else{
 														echo "N/C";
 													}
 													?>
                                                     </option>
-                                                    <option value="1">soft</option>
-                                                    <option value="2">no soft</option>
+                                                    <option value="1">S</option>
+                                                    <option value="2">N</option>
                                                     <option value="3">N/C</option>
                                                     </select>   </td> 
                 <td height="50" align="center  width="15%"">    <input type="text" class="form-control textbox" name="roll_b[]" placeholder="" value="<?php echo $detail_set[$i]['roll_b'] ?>">  </td>
-                <td height="50" align="center"  width="15%">    <select class="form-control textbox" name="softc[]">
-                									<option value="<?php echo $detail_set[$i]['softc'] ?>">
-                                                    <?php 	if($detail_set[$i]['softc']==1){
-																echo "soft";
-													}elseif($detail_set[$i]['softc']==2){
-														echo "no soft";
+                <td height="50" align="center"  width="15%">    <select class="form-control textbox select" name="sortc[]">
+                									<option value="<?php echo $detail_set[$i]['sortc'] ?>">
+                                                    <?php 	if($detail_set[$i]['sortc']==1){
+																echo "S";
+													}elseif($detail_set[$i]['sortc']==2){
+														echo "N";
 													}else{
 														echo "N/C";
 													}
 													?>
                                                     </option>
-                                                    <option value="1">soft</option>
-                                                    <option value="2">no soft</option>
+                                                    <option value="1">S</option>
+                                                    <option value="2">N</option>
                                                     <option value="3">N/C</option>
                                                     </select>  </td> 
                 <td height="50" align="center"  width="15%">    <input type="text" class="form-control textbox" name="roll_c[]" placeholder="" value="<?php echo $detail_set[$i]['roll_c'] ?>">  </td>
                 <?php }else{?>
-                 <td height="50" align="center  width="15%"">    <select class="form-control textbox" name="softa[]">
-                									<option value="1">soft</option>
-                                                    <option value="2">no soft</option>
+                 <td height="50" align="center  width="15%"">    <select class="form-control textbox" name="sorta[]">
+                									<option value="1">S</option>
+                                                    <option value="2">N</option>
                                                     <option value="3">N/C</option>
                                                     </select>  </td> 
                 <td height="50" align="center"  width="15%">    <input type="text" class="form-control textbox" name="roll_a[]" placeholder="">  </td> 
-                <td height="50" align="center"  width="15%">    <select class="form-control textbox" name="softb[]">
-                									<option value="1">soft</option>
-                                                    <option value="2">no soft</option>
+                <td height="50" align="center"  width="15%">    <select class="form-control textbox" name="sortb[]">
+                									<option value="1">S</option>
+                                                    <option value="2">N</option>
                                                     <option value="3">N/C</option>
                                                     </select>  </td> 
                 <td height="50" align="center"  width="15%">    <input type="text" class="form-control textbox" name="roll_b[]" placeholder="">  </td>
-                <td height="50" align="center"  width="15%">    <select class="form-control textbox" name="softc[]">
-                									<option value="1">soft</option>
-                                                    <option value="2">no soft</option>
+                <td height="50" align="center"  width="15%">    <select class="form-control textbox" name="sortc[]">
+                									<option value="1">S</option>
+                                                    <option value="2">N</option>
                                                     <option value="3">N/C</option>
                                                     </select>  </td> 
                 <td height="50" align="center"  width="15%">    <input type="text" class="form-control textbox" name="roll_c[]" placeholder="">  </td>               
@@ -362,16 +366,16 @@
 
 <div class="row">
                 <div class="col-sm-2" align="right">
-                    <strong>Soft</strong>
+                    <strong>sort</strong>
                 </div>
                 <div class="col-sm-2">
-                    <input type="number" class="form-control textbox" name="soft" placeholder="pallet" value="<?php echo $detail_folio[0]['soft']?>" readonly>
+                    <input type="number" class="form-control textbox" name="sort" placeholder="pallet" value="<?php echo $detail_folio[0]['sort']?>" readonly>
                 </div>
                 <div class="col-sm-2" align="right">
-                    <strong> No Soft </strong>
+                    <strong> No sort </strong>
                 </div>
                 <div class="col-sm-2">
-                    <input type="number" class="form-control textbox" name="nosoft" placeholder="pallet" value="<?php echo $detail_folio[0]['nosoft']?>" readonly>
+                    <input type="number" class="form-control textbox" name="nosort" placeholder="pallet" value="<?php echo $detail_folio[0]['nosort']?>" readonly>
                 </div>
                 <div class="col-sm-2" align="right">
                     <strong> N/C </strong>
@@ -402,13 +406,19 @@
                 <?php if($detail_problem[$arr]['problem_id']==$value_prob['problem_id']){ ?>
                 <div class="col-sm-2">
                 	<input type="hidden" name="problem_id[]" value="<?php echo $value_prob['problem_id']?>">
+                    <input type="hidden" name="cp_id[]" value="<?php echo $detail_problem[$arr]['cp_id']?>">
                     <input type="number" class="form-control textbox" name="downtime[]" placeholder="นาที" value="<?php echo $detail_problem[$arr]['min']?>">
                 </div>
+                <!--
                 <div class="col-sm-1">
                     <input type="text" class="form-control textbox" name="from[]" placeholder="from" value="<?php echo $detail_problem[$arr]['problem_from']?>">
                 </div>
                 <div class="col-sm-1">
                     <input type="text" class="form-control textbox" name="to[]" placeholder="to" value="<?php echo $detail_problem[$arr]['problem_to']?>">
+                </div>
+                -->
+                <div class="col-sm-2">
+                    <input type="text" class="form-control textbox" name="problem_remark[]" placeholder="remark" value="<?php echo $detail_problem[$arr]['problem_remark']?>">
                 </div>
                 <?php $arr++;}else{ ?>
                 <div class="col-sm-2">
@@ -436,272 +446,12 @@
     </div>
     </div>
 </div><br />
-
-<div class="row">
-	<div class="col-sm-12">
-    <div class="panel panel-green">
-            <div class="panel-heading">
-                <h3 class="panel-title"> <i class="fa fa-certificate fa-x2"></i>&nbsp;&nbsp; Remark / หมายเหตุ </h3>
-            </div>
-      
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-sm-2" align="right">
-                    Total Soft(Pallet)
-                </div>
-                <div class="col-sm-2">
-                    <input type="text" class="form-control textbox" name="remark_soft" placeholder="Pallet" 
-                    value="<?php echo $detail_remark[0]['remark_soft'] ?>">
-                </div>
-                <div class="col-sm-2" align="right">
-                    Total No Soft(Pallet)
-                </div>
-                <div class="col-sm-2">
-                    <input type="text" class="form-control textbox" name="remark_nosoft" placeholder="Pallet" 
-                    value="<?php echo $detail_remark[0]['remark_nosoft'] ?>">
-                </div>
-                <div class="col-sm-2" align="right">
-                    <strong>N/C(Pallet)</strong>
-                </div>
-                <div class="col-sm-2">
-                    <input type="text" class="form-control textbox" name="remark_nc" placeholder="Pallet" 
-                    value="<?php echo $detail_remark[0]['remark_nc'] ?>">
-                </div>
-                
-                
-            </div><br />
-            <!-- //////// Summary Data //////  -->
-            <div class="row">
-            	<div class="col-sm-4">
-                	<div class="row">
-                        <div class="col-sm-6" align="right">
-                            เกรดกระดาษ
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control textbox" name="remark_grade1" placeholder="" 
-                    value="<?php echo $detail_remark[0]['remark_grade1'] ?>">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6" align="right">
-                            Size
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control textbox" name="remark_size1" placeholder="" 
-                    value="<?php echo $detail_remark[0]['remark_size1'] ?>">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-6" align="right">
-                            Total Input
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="number" class="form-control textbox" name="remark_totalinput1" placeholder="กก." 
-                    value="<?php echo $detail_remark[0]['remark_totalinput1'] ?>">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6" align="right">
-                            Total Output
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="number" class="form-control textbox" name="remark_totaloutput1" placeholder="กก." 
-                    value="<?php echo $detail_remark[0]['remark_totaloutput1'] ?>">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6" align="right">
-                            รวมจำนวนรีม
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="number" class="form-control textbox" name="remark_totalream1" placeholder="รีม" 
-                    value="<?php echo $detail_remark[0]['remark_totalream1'] ?>">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                	<div class="row">
-                        <div class="col-sm-6" align="right">
-                            เกรดกระดาษ
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control textbox" name="remark_grade2" placeholder="" 
-                    value="<?php echo $detail_remark[0]['remark_grade2'] ?>">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6" align="right">
-                            Size
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control textbox" name="remark_size2" placeholder="" 
-                    value="<?php echo $detail_remark[0]['remark_size2'] ?>">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6" align="right">
-                            Total Input
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="number" class="form-control textbox" name="remark_totalinput2" placeholder="กก." 
-                    value="<?php echo $detail_remark[0]['remark_totalinput2'] ?>">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6" align="right">
-                            Total Output
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="number" class="form-control textbox" name="remark_totaloutput2" placeholder="กก." 
-                    value="<?php echo $detail_remark[0]['remark_totaloutput2'] ?>">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6" align="right">
-                            รวมจำนวนรีม
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="number" class="form-control textbox" name="remark_totalream2" placeholder="รีม" 
-                    value="<?php echo $detail_remark[0]['remark_totalream2'] ?>">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                	<div class="row">
-                        <div class="col-sm-6" align="right">
-                            เกรดกระดาษ
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control textbox" name="remark_grade3" placeholder="" 
-                    value="<?php echo $detail_remark[0]['remark_grade3'] ?>">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6" align="right">
-                            Size
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control textbox" name="remark_size3" placeholder="" 
-                    value="<?php echo $detail_remark[0]['remark_size3'] ?>">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6" align="right">
-                            Total Input
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="number" class="form-control textbox" name="remark_totalinput3" placeholder="กก." 
-                    value="<?php echo $detail_remark[0]['remark_totalinput3'] ?>">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6" align="right">
-                            Total Output
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="number" class="form-control textbox" name="remark_totaloutput3" placeholder="กก." 
-                    value="<?php echo $detail_remark[0]['remark_totaloutput3'] ?>">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6" align="right">
-                            รวมจำนวนรีม
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="number" class="form-control textbox" name="remark_totalream3" placeholder="รีม" 
-                    value="<?php echo $detail_remark[0]['remark_totalream3'] ?>">
-                        </div>
-                    </div>
-                </div>
-            </div><br /><hr />
-            <div class="row">
-                <div class="col-sm-2" align="right">
-                    <strong>Total Input</strong>
-                </div>
-                <div class="col-sm-2">
-                    <input type="text" class="form-control textbox" name="remark_total_input" placeholder="kg." 
-                    value="<?php echo $detail_remark[0]['remark_total_input'] ?>">
-                </div>
-                <div class="col-sm-2" align="right">
-                    <strong>Total Output</strong>
-                </div>
-                <div class="col-sm-2">
-                    <input type="text" class="form-control textbox" name="remark_total_output" placeholder="kg." 
-                    value="<?php echo $detail_remark[0]['remark_total_output'] ?>">
-                </div>
-                <div class="col-sm-2" align="right">
-                    <strong>รวมจำนวนรีม</strong>
-                </div>
-                <div class="col-sm-2">
-                    <input type="text" class="form-control textbox" name="remark_total_ream" placeholder="รีม" 
-                    value="<?php echo $detail_remark[0]['remark_total_ream'] ?>">
-                </div>
-            </div><hr />
-
-            <!-- //////// End Summary Data //////  -->
-            <div class="row">
-                <div class="col-sm-2" align="right">
-                    หัวหน้ากะ
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control textbox" name="remark_head_shift" placeholder="" 
-                    value="<?php echo $detail_remark[0]['remark_head_shift'] ?>">
-                </div>
-            </div><br />
-            <div class="row">
-                <div class="col-sm-2" align="right">
-                    พนักงานประจำเครื่องตัด
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control textbox" name="remark_employee1" placeholder="Control" 
-                    value="<?php echo $detail_remark[0]['remark_employee1'] ?>">
-                </div>
-                <div class="col-sm-2" align="right">
-                    พนักงานทำล่วงเวลา 
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control textbox" name="remark_em_ot1" placeholder="" 
-                    value="<?php echo $detail_remark[0]['remark_em_ot1'] ?>">
-                </div>
-            </div><br />
-			<div class="row">
-                <div class="col-sm-2" align="right">
-                    
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control textbox" name="remark_employee2" placeholder="Layboy" 
-                    value="<?php echo $detail_remark[0]['remark_employee2'] ?>">
-                </div>
-                <div class="col-sm-2" align="right">
-                     
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control textbox" name="remark_em_ot2" placeholder="" 
-                    value="<?php echo $detail_remark[0]['remark_em_ot2'] ?>">
-                </div>
-            </div><br />
-			<div class="row">
-                <div class="col-sm-2" align="right">
-                    คู่ธุรกิจ
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control textbox" name="remark_customer" placeholder="" 
-                    value="<?php echo $detail_remark[0]['remark_customer'] ?>">
-                </div>
-            </div><br />
-        </div>
-    </div>
-    </div>
-</div><br />
-
 <div class="row">
 <div align="center"> 
     <input type="hidden" name="cut_size" value="<?php echo $this->uri->segment(3)?>" />
     <input type="hidden" name="date" value="<?php echo $detail_folio[0]['date']?>" />
     <input type="hidden" name="shift" value="<?php echo $detail_folio[0]['shift']?>" />
     <input type="hidden" name="f_id" value="<?php echo $detail_folio[0]['f_id']?>" />
-    <input type="hidden" name="lfr_id" value="<?php echo $detail_remark[0]['lfr_id']?>" />
     <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>  </div>
 </div>
 </div><br />
@@ -727,6 +477,10 @@
 	  .text_orange{
 	  	color:#C60;
 		border-bottom: 1px dotted ;
+	  }
+	  .select{
+		padding: 0;
+  		font-size: 12px;
 	  }
 </style>
 <script src="<?php echo base_url()?>assets/js/setformfolio.js"></script>

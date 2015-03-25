@@ -51,6 +51,21 @@ class logsheet_model extends CI_Model {
 		$this->db->where('lfr_id',$inData['lfr_id']);
 		$this->db->update('log_folio_remark',$inData);
 	}
+	public function folioPrombleUpdate($inData)
+	{
+		$this->db->where('cp_id',$inData['cp_id']);
+		$this->db->update('log_folio_problem',$inData);
+	}
+	public function folioSetUpdate($inData)
+	{
+		$this->db->where('lfs_id',$inData['lfs_id']);
+		$this->db->update('log_folio_set',$inData);
+	}
+	public function folioReelUpdate($inData)
+	{
+		$this->db->where('lfr_id',$inData['lfr_id']);
+		$this->db->update('log_folio_reel',$inData);
+	}
 	public function cutSizePrombleUpdate($inData)
 	{
 		$this->db->where('cp_id',$inData['cp_id']);
@@ -241,5 +256,10 @@ class logsheet_model extends CI_Model {
 		$this->db->join('log_folio_problem','log_folio_problem.f_id = folio_data.f_id ');
 		$query = $this->db->get('folio_data');
 		return $query->result_array();
+	}
+	public function delete_set_($product_id)
+	{
+		$this->db->where('product_id',$product_id);
+		$this->db->delete('product');
 	}
 }

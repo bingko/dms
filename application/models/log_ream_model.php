@@ -23,8 +23,9 @@ class log_ream_model extends CI_Model {
 		$query = $this->db->get('log_ream_problem');
 		return $query->result_array();
 	}
-	public function update_log_ream($data){
-		
+	public function update_log_ream($inData){
+		$this->db->where('log_ream_id',$inData['log_ream_id']);
+		$this->db->update('log_ream',$inData);
 	}
 	public function search_problem($problem,$problem_value){
 		foreach($problem_value as $i=>$value){

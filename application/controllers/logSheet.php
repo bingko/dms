@@ -39,9 +39,9 @@ class logSheet extends CI_Controller {
 
 		// echo "<pre>";
 		// print_r($data['logSheet_set']);
-		// print_r($data['get_problem']);
-		// print_r($data['problem_shift']);
-		// print_r($data['problem_person']);
+		// // print_r($data['get_problem']);
+		// // print_r($data['problem_shift']);
+		// // print_r($data['problem_person']);
 		// exit();
  		$data['page'] = "logSheet/search-log";
 		$this->load->view('index',$data);
@@ -76,7 +76,6 @@ class logSheet extends CI_Controller {
 		$cutter_type = 1;
 		$data['detail_CutSite'] = $this->logsheet_model->getLogSheet_set_detail($c_id);
 		$data['detail_problem'] = $this->logsheet_model->getLogSheet_problem_detail($c_id);
-		$data['detail_remark'] = $this->logsheet_model->getLogSheet_remark_detail($c_id);
 		// echo "<pre>";
 		// print_r($data);
 		// exit();
@@ -102,11 +101,10 @@ class logSheet extends CI_Controller {
 		$cutter_type = 2;
 		$data['detail_folio'] = $this->logsheet_model->getLogSheet_folio_detail($f_id);
 		$data['detail_problem'] = $this->logsheet_model->getLogSheet_folio_problem_detail($f_id);
-		$data['detail_remark'] = $this->logsheet_model->getLogSheet_folio_remark_detail($f_id);
 		$data['detail_reel'] = $this->logsheet_model->getLogSheet_folio_reel_detail($f_id);
 		$data['detail_set'] = $this->logsheet_model->getLogSheet_folio_set_detail($f_id);
 		// echo "<pre>";
-		// print_r($data);
+		// print_r($data['detail_problem']);
 		// exit();
 		$cutter = $this->uri->segment(3);
 		$data['cutter'] = $this->uri->segment(3);

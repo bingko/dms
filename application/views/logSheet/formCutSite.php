@@ -249,7 +249,7 @@
               <input type="number" class="form-control textbox" name="downtime[]" placeholder="นาที">
             </div>
             <div class="col-sm-2">
-              <input type="text" class="form-control textbox" name="remark[]" placeholder="หมายเหตุ">
+              <input type="text" class="form-control textbox" name="problem_remark[]" placeholder="หมายเหตุ">
             </div>
             <?php }?>
           </div>

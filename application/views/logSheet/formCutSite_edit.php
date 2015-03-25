@@ -311,7 +311,7 @@
 					?>">
             </div>
             <div class="col-sm-2">
-              <input type="text" class="form-control textbox" name="remark[]" placeholder="หมายเหตุ"
+              <input type="text" class="form-control textbox" name="problem_remark[]" placeholder="หมายเหตุ"
                      value="<?php 
 					for($i=0;$i<count($detail_problem);$i++){
 							if($value_prob['problem_id']==$detail_problem[$i]['problem_id']) { 
@@ -332,205 +332,13 @@
         </div>
       </div>
     </div>
-  </div>
-  <br />
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="panel panel-green">
-        <div class="panel-heading">
-          <h3 class="panel-title"> <i class="fa fa-certificate fa-x2"></i>&nbsp;&nbsp; Remark / หมายเหตุ </h3>
-        </div>
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-sm-2" align="right"> Total Finished Goods </div>
-            <div class="col-sm-2">
-              <select  name="size_finished" class="form-control textbox">
-                <option value='<?php echo$detail_remark[0]['size'] ?>'><?php echo$detail_remark[0]['size'] ?></option>
-                <option value='A4'>A4</option>
-                <option value-'A3'>A3</option>
-                <option value='B4'>B4</option>
-                <option value='B5'>B5</option>
-              </select>
-            </div>
-            <div class="col-sm-2">
-              <input type="text" class="form-control textbox" name="remark_ton" placeholder="ton" value='<?php echo$detail_remark[0]['ton'] ?>'>
-            </div>
-            <div class="col-sm-2" align="right"> <strong>Total FG</strong> </div>
-            <div class="col-sm-2">
-              <input type="text" class="form-control textbox" name="remark_total_fg" placeholder="kg." value='<?php echo$detail_remark[0]['total_fg'] ?>'>
-            </div>
-            <div class="col-sm-1" align="left"> kg. </div>
-          </div>
-          <br />
-          <!-- //////// Summary Data //////  -->
-          <div class="row">
-            <div class="col-sm-4">
-              <div class="row">
-                <div class="col-sm-6" align="right"> เกรด / แกรม </div>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control textbox" name="remark_grade1" placeholder="ton" value='<?php echo$detail_remark[0]['grade1'] ?>'>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6" align="right"> Mat No. </div>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control textbox" name="remark_mat1" placeholder="" value='<?php echo$detail_remark[0]['mat1'] ?>'>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6" align="right"> จำนวน </div>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control textbox" name="remark_ream1" placeholder="รีม" value='<?php echo$detail_remark[0]['ream1'] ?>'>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6" align="right"> น้ำหนัก </div>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control textbox" name="remark_weight1" placeholder="กก." value='<?php echo$detail_remark[0]['weight1'] ?>'>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="row">
-                <div class="col-sm-6" align="right"> เกรด / แกรม </div>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control textbox" name="remark_grade2" placeholder="ton" value='<?php echo$detail_remark[0]['grade2'] ?>'>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6" align="right"> Mat No. </div>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control textbox" name="remark_mat2" placeholder="" value='<?php echo$detail_remark[0]['mat2'] ?>'>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6" align="right"> จำนวน </div>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control textbox" name="remark_ream2" placeholder="รีม" value='<?php echo$detail_remark[0]['ream2'] ?>'>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6" align="right"> น้ำหนัก </div>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control textbox" name="remark_weight2" placeholder="กก." value='<?php echo$detail_remark[0]['weight2'] ?>'>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="row">
-                <div class="col-sm-6" align="right"> เกรด / แกรม </div>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control textbox" name="remark_grade3" placeholder="ton" value='<?php echo$detail_remark[0]['grade3'] ?>'>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6" align="right"> Mat No. </div>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control textbox" name="remark_mat3" placeholder="" value='<?php echo$detail_remark[0]['mat3'] ?>'>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6" align="right"> จำนวน </div>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control textbox" name="remark_ream3" placeholder="รีม" value='<?php echo$detail_remark[0]['ream3'] ?>'>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6" align="right"> น้ำหนัก </div>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control textbox" name="remark_weight3" placeholder="กก." value='<?php echo$detail_remark[0]['weight3'] ?>'>
-                </div>
-              </div>
-            </div>
-          </div>
-          <br />
-          <!-- //////// End Summary Data //////  -->
-          <div class="row">
-            <div class="col-sm-2" align="right"> หัวหน้ากะ </div>
-            <div class="col-sm-4">
-              <input type="text" class="form-control textbox" name="remark_head_shift" placeholder="" value='<?php echo$detail_remark[0]['head_shift'] ?>'>
-            </div>
-          </div>
-          <br />
-          <div class="row">
-            <div class="col-sm-2" align="right"> พนักงานประจำเครื่องตัด </div>
-            <div class="col-sm-4">
-              <input type="text" class="form-control textbox" name="remark_employee1" placeholder="" value='<?php echo$detail_remark[0]['employee1'] ?>'>
-            </div>
-            <div class="col-sm-2" align="right"> พนักงานทำล่วงเวลา </div>
-            <div class="col-sm-4">
-              <input type="text" class="form-control textbox" name="remark_em_ot1" placeholder="" value='<?php echo$detail_remark[0]['em_ot1'] ?>'>
-            </div>
-          </div>
-          <br />
-          <div class="row">
-            <div class="col-sm-2" align="right"> </div>
-            <div class="col-sm-4">
-              <input type="text" class="form-control textbox" name="remark_employee2" placeholder="" value='<?php echo$detail_remark[0]['employee2'] ?>'>
-            </div>
-            <div class="col-sm-2" align="right"> </div>
-            <div class="col-sm-4">
-              <input type="text" class="form-control textbox" name="remark_em_ot2" placeholder="" value='<?php echo$detail_remark[0]['em_ot2'] ?>'>
-            </div>
-          </div>
-          <br />
-          <div class="row">
-            <div class="col-sm-2" align="right"> </div>
-            <div class="col-sm-4">
-              <input type="text" class="form-control textbox" name="remark_employee3" placeholder="" value='<?php echo$detail_remark[0]['employee3'] ?>'>
-            </div>
-            <div class="col-sm-2" align="right"> </div>
-            <div class="col-sm-4">
-              <input type="text" class="form-control textbox" name="remark_em_ot3" placeholder="" value='<?php echo$detail_remark[0]['em_ot3'] ?>'>
-            </div>
-          </div>
-          <br />
-          <div class="row">
-            <div class="col-sm-2" align="right"> คู่ธุรกิจ </div>
-            <div class="col-sm-4">
-              <input type="text" class="form-control textbox" name="remark_customer" placeholder="" value='<?php echo$detail_remark[0]['customer_name'] ?>'>
-            </div>
-          </div>
-          <br />
-          <br />
-          <div class="row">
-            <div class="col-sm-3"> <strong>วัสดุเพื่อการผลิตเสียหาย</strong> </div>
-          </div>
-          <br />
-          <div class="row">
-            <div class="col-sm-2" align="right"> เปลือกห่อ </div>
-            <div class="col-sm-4">
-              <input type="text" class="form-control textbox" name="remark_mat_dmg1" placeholder="" value='<?php echo$detail_remark[0]['mat_for_dmg1'] ?>'>
-            </div>
-            <div class="col-sm-2" align="right"> กล่อง </div>
-            <div class="col-sm-4">
-              <input type="text" class="form-control textbox" name="remark_mat_dmg2" placeholder="" value='<?php echo$detail_remark[0]['mat_for_dmg2'] ?>'>
-            </div>
-          </div>
-          <br />
-          <div class="row">
-            <div class="col-sm-2" align="right"> ฝา </div>
-            <div class="col-sm-4">
-              <input type="text" class="form-control textbox" name="remark_mat_dmg3" placeholder="" value='<?php echo$detail_remark[0]['mat_for_dmg3'] ?>'>
-            </div>
-            <div class="col-sm-2" align="right"> ม้วนรัดกล่อง </div>
-            <div class="col-sm-4">
-              <input type="text" class="form-control textbox" name="remark_mat_dmg4" placeholder="" value='<?php echo$detail_remark[0]['mat_for_dmg4'] ?>'>
-            </div>
-          </div>
-          <br />
-        </div>
-      </div>
-    </div>
-  </div>
-  <br />
+  </div><br />
   <div class="row">
     <div align="center">
       <input type="hidden" name="cut_size" value="<?php echo $this->uri->segment(3)?>" />
       <input type="hidden" name="date" value="<?php echo $detail_CutSite[0]['date']?>" />
       <input type="hidden" name="shift" value="<?php echo $detail_CutSite[0]['shift']?>" />
       <input type="hidden" name="c_id" value="<?php echo $detail_CutSite[0]['c_id']?>" />
-      <input type="hidden" name="lcr_id" value="<?php echo $detail_remark[0]['lcr_id']?>" />
       <button type="submit" class="btn btn-primary">แก้ไขข้อมูล</button>
     </div>
   </div>
