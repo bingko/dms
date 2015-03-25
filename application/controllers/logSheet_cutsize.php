@@ -4,11 +4,18 @@ class logSheet_cutsize extends CI_Controller {
 
 	public function add_input_cutsize()
 	{
-
+		$inData = array(
+			'cut_size' => $this->input->post('cut_size'),
+			'shift' => $this->input->post('shift'),
+			'date' => $this->input->post('date'),
+			);
+		$set_check = $this->logsheet_model->count_cutsize($inData);
+		$set = $set_check+1 ;
 		$inData = array(
 		"cut_size" => $_POST["cut_size"],
 		"date" => $_POST["date"],
 		"shift" => $_POST["shift"],
+		"set" => $set,
 		 "appearance"  => $_POST["appearance"],
 		  "box"  =>   $_POST["box"],
 		  "cover"  =>  $_POST["cover"],
@@ -188,52 +195,24 @@ class logSheet_cutsize extends CI_Controller {
 				"c_id"  =>  $c_id,
 			);
 		$this->logsheet_model->cutSizePrombleUpdate($inData);
-		}
-
-		$inData = array(
-			"lcr_id"  =>  $this->input->post('lcr_id'),
-			"c_id"  =>  $c_id,
-			'size' => $this->input->post('size_finished'),
-			'ton' => $this->input->post('remark_ton'),
-			'total_fg' => $this->input->post('remark_total_fg'),
-			'grade1' => $this->input->post('remark_grade1'),
-			'mat1' => $this->input->post('remark_mat1'),
-			'ream1' => $this->input->post('remark_ream1'),
-			'weight1' => $this->input->post('remark_weight1'),
-			'grade2' => $this->input->post('remark_grade2'),
-			'mat2' => $this->input->post('remark_mat2'),
-			'ream2' => $this->input->post('remark_ream2'),
-			'weight2' => $this->input->post('remark_weight2'),
-			'grade3' => $this->input->post('remark_grade3'),
-			'mat3' => $this->input->post('remark_mat3'),
-			'ream3' => $this->input->post('remark_ream3'),
-			'weight3' => $this->input->post('remark_weight3'),
-			'head_shift' => $this->input->post('remark_head_shift'),
-			'employee1' => $this->input->post('remark_employee1'),
-			'employee2' => $this->input->post('remark_employee2'),
-			'employee3' => $this->input->post('remark_employee3'),
-			'em_ot1' => $this->input->post('remark_em_ot1'),
-			'em_ot2' => $this->input->post('remark_em_ot2'),
-			'em_ot3' => $this->input->post('remark_em_ot3'),
-			'customer_name' => $this->input->post('remark_customer'),
-			'mat_for_dmg1' => $this->input->post('remark_mat_dmg1'),
-			'mat_for_dmg2' => $this->input->post('remark_mat_dmg2'),
-			'mat_for_dmg3' => $this->input->post('remark_mat_dmg3'),
-			'mat_for_dmg4' => $this->input->post('remark_mat_dmg4'),
-			'remark' => $this->input->post('remark'),
-		);
-		$this->logsheet_model->cutSizeRemarkUpdate($inData);
-		//print_r($inData);
+		}	
 		// exit();
 		redirect('logSheet/searchLog/'.$_POST["cut_size"].'/'.date('Y-m'));
 	}
 	public function add_input_folio()
 	{
-
+		$inData = array(
+			'cut_size' => $this->input->post('cut_size'),
+			'shift' => $this->input->post('shift'),
+			'date' => $this->input->post('date'),
+			);
+		$set_check = $this->logsheet_model->count_folio($inData);
+		$set = $set_check+1 ;
 		$inData = array(
 			'cutter' => $this->input->post('cut_size'),
 			'date' => $this->input->post('date'),
 			'shift' => $this->input->post('shift'),
+			'set' => $set,
 			'grade' => $this->input->post('grade'),
 			'order' => $this->input->post('order'),
 			'item' => $this->input->post('item'),
@@ -296,37 +275,6 @@ class logSheet_cutsize extends CI_Controller {
 		$this->logsheet_model->folioSetInsert($inData);
 		}
 
-		$inData = array(
-			"f_id"  =>  $id,
-			'remark_soft' => $this->input->post('remark_soft'),
-			'remark_nosoft' => $this->input->post('remark_nosoft'),
-			'remark_nc' => $this->input->post('remark_nc'),
-			'remark_grade1' => $this->input->post('remark_grade1'),
-			'remark_size1' => $this->input->post('remark_size1'),
-			'remark_totalinput1' => $this->input->post('remark_totalinput1'),
-			'remark_totaloutput1' => $this->input->post('remark_totaloutput1'),
-			'remark_totalream1' => $this->input->post('remark_totalream1'),
-			'remark_grade2' => $this->input->post('remark_grade2'),
-			'remark_size2' => $this->input->post('remark_size2'),
-			'remark_totalinput2' => $this->input->post('remark_totalinput2'),
-			'remark_totaloutput2' => $this->input->post('remark_totaloutput2'),
-			'remark_totalream2' => $this->input->post('remark_totalream2'),
-			'remark_grade3' => $this->input->post('remark_grade3'),
-			'remark_size3' => $this->input->post('remark_size3'),
-			'remark_totalinput3' => $this->input->post('remark_totalinput3'),
-			'remark_totaloutput3' => $this->input->post('remark_totaloutput3'),
-			'remark_totalream3' => $this->input->post('remark_totalream3'),
-			'remark_employee1' => $this->input->post('remark_employee1'),
-			'remark_employee2' => $this->input->post('remark_employee2'),
-			'remark_em_ot1' => $this->input->post('remark_em_ot1'),
-			'remark_em_ot2' => $this->input->post('remark_em_ot2'),
-			'remark_customer' => $this->input->post('remark_customer'),
-			'remark_total_input' => $this->input->post('remark_total_input'),
-			'remark_total_output' => $this->input->post('remark_total_output'),
-			'remark_total_ream' => $this->input->post('remark_total_ream'),
-			'remark_head_shift' => $this->input->post('remark_head_shift'),
-		);
-		$this->logsheet_model->folioRemarkInsert($inData);
 		redirect('logSheet/searchLog/'.$_POST["cut_size"].'/'.date('Y-m'));
 	}
 	public function edit_input_folio()
@@ -482,5 +430,76 @@ class logSheet_cutsize extends CI_Controller {
 				$this->db->insert('log_ream_problem',$problem_detail);
 			}
 		}
+	}
+	public function insert_person_cutsite()
+	{
+		$inData = array(
+			'cut_size' => $this->input->post('cut_size'), 
+			'shift' => $this->input->post('shift'),
+			'date' => $this->input->post('date'),
+			'head_shift' => $this->input->post('remark_head_shift'),
+			'employee1' => $this->input->post('remark_employee1'),
+			'employee2' => $this->input->post('remark_employee2'),
+			'employee3' => $this->input->post('remark_employee3'),
+			'em_ot1' => $this->input->post('remark_em_ot1'),
+			'em_ot2' => $this->input->post('remark_em_ot2'),
+			'em_ot3' => $this->input->post('remark_em_ot3'),
+			'customer_name' => $this->input->post('remark_customer'),
+			'remark' => $this->input->post('remark'),
+		);
+		// echo "<pre>";
+		// print_r($inData);
+		// exit();
+		$this->logsheet_model->cutSizeRemarkInsert($inData);
+		redirect('logSheet/searchLog/'.$inData["cut_size"].'/'.date('Y-m'));
+	}
+	public function edit_person_cutsite(){
+		$inData = array(
+			'lcr_id' => $this->input->post('lcr_id'), 
+			'cut_size' => $this->input->post('cut_size'), 
+			'head_shift' => $this->input->post('remark_head_shift'),
+			'employee1' => $this->input->post('remark_employee1'),
+			'employee2' => $this->input->post('remark_employee2'),
+			'employee3' => $this->input->post('remark_employee3'),
+			'em_ot1' => $this->input->post('remark_em_ot1'),
+			'em_ot2' => $this->input->post('remark_em_ot2'),
+			'em_ot3' => $this->input->post('remark_em_ot3'),
+			'customer_name' => $this->input->post('remark_customer'),
+			'remark' => $this->input->post('remark'),
+		);
+		$this->logsheet_model->cutSizeRemarkUpdate($inData);
+		redirect('logSheet/searchLog/'.$inData["cut_size"].'/'.date('Y-m'));
+
+	}
+	public function insert_person_folio()
+	{
+		$inData = array(
+			'cut_size' => $this->input->post('cut_size'), 
+			'shift' => $this->input->post('shift'),
+			'date' => $this->input->post('date'),
+			'remark_head_shift' => $this->input->post('remark_head_shift'),
+			'remark_employee1' => $this->input->post('remark_employee1'),
+			'remark_employee2' => $this->input->post('remark_employee2'),
+			'remark_em_ot1' => $this->input->post('remark_em_ot1'),
+			'remark_em_ot2' => $this->input->post('remark_em_ot2'),
+			'remark_customer' => $this->input->post('remark_customer'),
+		);
+		$this->logsheet_model->folioRemarkInsert($inData);
+		redirect('logSheet/searchLog/'.$inData["cut_size"].'/'.date('Y-m'));
+	}
+	public function edit_person_folio(){
+		$inData = array(
+			'lfr_id' => $this->input->post('lfr_id'), 
+			'cut_size' => $this->input->post('cut_size'), 
+			'remark_head_shift' => $this->input->post('remark_head_shift'),
+			'remark_employee1' => $this->input->post('remark_employee1'),
+			'remark_employee2' => $this->input->post('remark_employee2'),
+			'remark_em_ot1' => $this->input->post('remark_em_ot1'),
+			'remark_em_ot2' => $this->input->post('remark_em_ot2'),
+			'remark_customer' => $this->input->post('remark_customer'),
+		);
+		$this->logsheet_model->folioRemarkUpdate($inData);
+		redirect('logSheet/searchLog/'.$inData["cut_size"].'/'.date('Y-m'));
+
 	}
 }

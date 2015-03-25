@@ -1,7 +1,5 @@
 <?php 
 	echo link_tag('assets/css/kendo/kendo.common.min.css');
-	echo link_tag('assets/css/kendo/kendo.flat.min.css');
-	echo link_tag('assets/css/kendo/kendo.dataviz.flat.min.css');
 	echo link_tag('assets/css/kendo/kendo.default.css');
 	echo link_tag('assets/css/monitor.css');
 ?>
@@ -21,7 +19,16 @@
 		text-align:center;	
 		vertical-align:middle;
 	}
-
+	.lable-thead{
+		font-size:12px;
+	}
+	.date-current a{
+		color:#FFF;
+	}
+	.date-current a hover{
+		color:#EEE;
+	}
+	
 </style>
 <script src="<?php echo base_url()?>assets/js/kendo.all.min.js"></script>
 <script src="<?php echo base_url()?>assets/js/dataTables/jquery.dataTables.js"></script> 
@@ -49,6 +56,8 @@
 				<div id="date">
 					<div class="row">
 						<div class="col-sm-12"  align="right"> 
+
+
                                 	<input type="hidden" name="cutter" value="<?php echo $this->uri->segment(3);?>" />
 									<input type="date" id="monthpicker" value="<?php echo $this->uri->segment(4);?>" class="form-control end" name="end_date" onchange="this.form.submit()"/>
 
@@ -59,7 +68,7 @@
 			<div class="table-responsive" style="overflow:hidden;">
 	<table id="data-table" class="table table-bordered table-hover table-striped">
           <thead>
-            <tr>
+            <tr bgcolor="#EEE">
               <th width="20%">Date</th>
               <th width="12%">เข้า</th>
               <th width="12%">บ่าย</th>
@@ -79,7 +88,7 @@
 			
 			for($i=1;$i<=$d;$i++){
 					if($datetime2->format('Y-m-d')==(new DateTime())->format('Y-m-d')){
-						echo 	'<tr style="background:#FF9">'; //mark current day
+						echo 	'<tr class="date-current" style="background:#6699CC;color:#FFF;">'; //mark current day
 					}
 					else{
 						echo 	'<tr>';
@@ -195,8 +204,8 @@ if(isset($logSheet_set)){ ?>
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="summary">
-    	
       <?php if($this->uri->segment(3)==1||$this->uri->segment(3)==4){ ?>
+       <!-------------------- Cut Size  ---------------------->
         <div class="row">
         	<?php   $no=1; 
 					$sum_weight = 0;
@@ -210,20 +219,20 @@ if(isset($logSheet_set)){ ?>
             </thead>
             <tbody>
             	<tr>
-                    <td>Input(kg.) </td>
-                    <td><?php echo number_format($value_set['input_weight']);?></td>
+                    <td>เกรด / แกรม </td>
+                    <td><?php echo $value_set['grade_gram'];?></td>
                  </tr>
                  <tr>
-                    <td>Output(kg.) </td>
-                    <td><?php echo number_format($value_set['output_weight']);?></td>
+                    <td>Mat no. </td>
+                    <td><?php echo number_format($value_set['mat_no']);?></td>
                  </tr>
                 <tr>
-                    <td>Ream </td>
-                    <td><?php echo number_format($value_set['total_ream']);?></td>
+                    <td>จำนวน </td>
+                    <td><?php echo number_format($value_set['total_ream']);?> &nbsp;&nbsp; รีม</td>
                  </tr>
                  <tr>
-                    <td>Reject(kg.) </td>
-                    <td><?php echo $value_set['total_reject'].' ('.$value_set['total_reject_percentage'].'%)';?></td>
+                    <td>น้ำหนัก </td>
+                    <td><?php echo number_format($value_set['output_weight']);?> &nbsp;&nbsp; กก.</td>
                  </tr>
             </tbody>
               
@@ -259,10 +268,12 @@ if(isset($logSheet_set)){ ?>
            </div>
         </div>
       <?php }elseif($this->uri->segment(3)==2||$this->uri->segment(3)==3){ ?>
+       <!-------------------- Folio  ---------------------->
         <div class="row">
         	<?php   $no=1; 
 					$total_input = 0;
 					$total_output = 0;
+					$total_ream = 0;
 					foreach($logSheet_set as $value_set){?>
         	<div class="col-lg-4" align="center">
             <table class="table">
@@ -290,6 +301,10 @@ if(isset($logSheet_set)){ ?>
                     <td>Total Reject(kg.) </td>
                     <td><?php echo $value_set['total_reject']?></td>
                  </tr>
+                 <tr>
+                    <td>จำนวนที่ตัดได้ </td>
+                    <td><?php echo $value_set['ream']?></td>
+                 </tr>
             </tbody>
               
             </table>
@@ -299,7 +314,7 @@ if(isset($logSheet_set)){ ?>
            	<?php $no++;
 				$total_output += $value_set['output']; 
 				$total_input += $value_set['total_input']; 
-				
+				$total_ream += $value_set['ream'];
 			}?>
         </div><hr />
         <div class="row">
@@ -310,12 +325,24 @@ if(isset($logSheet_set)){ ?>
             </thead>
             <tbody>
             	<tr>
+                    <td>เกรดกระดาษ </td>
+                    <td><?php echo $logSheet_set[0]['grade'].' - '.$logSheet_set[0]['gram'];?></td>
+                 </tr>
+                 <tr>
+                    <td>Size </td>
+                    <td><?php echo $logSheet_set[0]['size_width'].' x '.$logSheet_set[0]['size_height'].' '.$logSheet_set[0]['unit'];?></td>
+                 </tr>
+            	<tr>
                     <td><strong>Total Input(kg.)</strong> </td>
                     <td><?php echo number_format($total_input);?></td>
                  </tr>
                 <tr>
-                    <td><strong>Total Outout </strong></td>
+                    <td><strong>Total Output </strong></td>
                     <td><?php echo number_format($total_output);?></td>
+                 </tr>
+                 <tr>
+                    <td><strong>Total Ream </strong></td>
+                    <td><?php echo number_format($total_ream);?></td>
                  </tr>
                  
             </tbody>
@@ -325,58 +352,234 @@ if(isset($logSheet_set)){ ?>
         </div>
         <?php } ?>
     </div>
-    <div role="tabpanel" class="tab-pane" id="problem">...</div>
+    <div role="tabpanel" class="tab-pane" id="problem">
+    	<div class="row">
+        	<div class="col-sm-12"><h2> Machine Problem </h2></div>
+        </div>
+        <?php if($this->uri->segment(3)==1||$this->uri->segment(3)==4){ ?>
+       <!-------------------- Cut Size  ---------------------->
+        <div class="row">
+        	<div class="col-sm-12">
+            	<table class="table table-bordered lable-thead table-striped">
+                <thead>
+                	<tr>
+                		<th colspan="<?php echo count($logSheet_set)+1 ; ?>">Machine Problem</th>
+                        <th colspan="2">Down Time</th>
+                    </tr>
+                    <tr>
+                		<th width="35%">Item</th>
+                        <?php for($no=0;$no<count($logSheet_set);$no++){ ?>
+                        <th>Set <?php echo $no+1; ?><br />(min)</th>
+						<?php } ?>
+                        <th>Total<br />(min)</th>
+                        <th>หมายเหตุ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php $arr=0; foreach($get_problem as $problem_cutsize1){ ?>
+                <tr>
+                <td><?php echo $problem_cutsize1['problem_name']; ?></td>
+                
+                <?php if(!empty($problem_shift)){ ?>
+                <td><?php echo $set1 = $problem_shift[$arr]['total_minutes']?></td>
+                <?php } ?>
+                <?php for($i=1;$i<count($logSheet_set);$i++){ ?> 
+                <td><?php $arr_set[$i] = ($arr+count($get_problem)*($i))%count($problem_shift);
+							echo  $set[$i] = $problem_shift[$arr_set[$i]]['total_minutes'] ;?></td>
+                <?php } ?>
+                <td><?php if(isset($arr_set)){echo array_sum($set)+$set1;}?></td>
+                <td></td>
+                </tr>
+                <?php   $arr++;}?>
+                </tbody>
+                </table>
+            </div>
+        </div>
+        <?php }elseif($this->uri->segment(3)==2||$this->uri->segment(3)==3){ ?>
+       <!-------------------- Folio  ---------------------->
+       <div class="row">
+        	<div class="col-sm-12">
+            	<table class="table table-bordered lable-thead table-striped">
+                <thead>
+                	<tr>
+                		<th colspan="<?php echo count($logSheet_set)+1 ; ?>">Machine Problem</th>
+                        <th colspan="2">Down Time</th>
+                    </tr>
+                    <tr>
+                		<th width="35%">Item</th>
+                        <?php for($no=0;$no<count($logSheet_set);$no++){ ?>
+                        <th>Set <?php echo $no+1; ?><br />(min)</th>
+						<?php } ?>
+                        <th>Total<br />(min)</th>
+                        <th>หมายเหตุ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php $arr=0; foreach($get_problem as $problem_folio){ ?>
+                <tr>
+                <td><?php echo $problem_folio['problem_name']; ?></td>
+                
+                <?php if(!empty($problem_shift)){ ?>
+                <td><?php echo $set1 = $problem_shift[$arr]['min']?></td>
+                	<?php for($i=1;$i<count($logSheet_set);$i++){ ?> 
+                <td><?php $arr_set[$i] = ($arr+count($get_problem)*($i))%count($problem_shift);
+							echo  $set[$i] = $problem_shift[$arr_set[$i]]['min'] ;?></td>
+                <?php 	} ?>
+                <?php } ?>
+                <td><?php if(isset($arr_set)){echo array_sum($set)+$set1;}?></td>
+                <td></td>
+                </tr>
+                <?php   $arr++;}?>
+                </tbody>
+                </table>
+            </div>
+        </div>
+        <?php } ?>
+    </div>
     <div role="tabpanel" class="tab-pane" id="employee">
       <!------------------- EMPLOYEE  ------------------->
+            <?php if($this->uri->segment(3)==1||$this->uri->segment(3)==4){
+				if(empty($problem_person)){
+					echo form_open('logSheet_cutsize/insert_person_cutsite');
+				}else{
+					echo form_open('logSheet_cutsize/edit_person_cutsite');
+					echo '<input type="hidden" name="lcr_id" value="'.$problem_person[0]['lcr_id'].'">';
+				}?>
     	<div class="row">
     <div class="col-sm-12"><br /><br />
-
           <div class="row">
             <div class="col-sm-3" align="right"> <strong>หัวหน้ากะ</strong> </div>
             <div class="col-sm-9">
-              <input type="text" class="form-control textbox" name="remark_head_shift" placeholder="">
+              <input type="text" class="form-control textbox" name="remark_head_shift" placeholder="" value="<?php echo @$problem_person[0]['head_shift']?>" >
+            </div>
+          </div>
+          <br />
+           <div class="row">
+            <div class="col-sm-4" align="left"> <strong>พนง.ประจำเครื่องตัด</strong> </div>
+            <div class="col-sm-9"> </div>
+          </div><br />
+          <div class="row">
+            <div class="col-sm-3" align="right"> 1. </div>
+            <div class="col-sm-9">
+              <input type="text" class="form-control textbox" name="remark_employee1" placeholder="" value="<?php echo @$problem_person[0]['employee1']?>" >
+            </div>
+          </div><br />
+			<div class="row">
+            <div class="col-sm-3" align="right"> 2. </div>
+            <div class="col-sm-9">
+              <input type="text" class="form-control textbox" name="remark_employee2" placeholder="" value="<?php echo @$problem_person[0]['employee2']?>" >
+            </div>
+          </div><br />
+          <div class="row">
+            <div class="col-sm-3" align="right"> 3. </div>
+            <div class="col-sm-9">
+              <input type="text" class="form-control textbox" name="remark_employee3" placeholder="" value="<?php echo @$problem_person[0]['employee3']?>" >
+            </div>
+          </div><br />
+          <div class="row">
+            <div class="col-sm-4" align="left"> <strong>Overtime</strong> </div>
+            <div class="col-sm-9"> </div>
+          </div><br />
+
+            <div class="row">
+            <div class="col-sm-3" align="right"> 1. </div>
+            <div class="col-sm-9">
+              <input type="text" class="form-control textbox" name="remark_em_ot1" placeholder="" value="<?php echo @$problem_person[0]['em_ot1']?>" >
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-sm-3" align="right">  2. </div>
+            <div class="col-sm-9">
+              <input type="text" class="form-control textbox" name="remark_em_ot2" placeholder="" value="<?php echo @$problem_person[0]['em_ot2']?>" >
+            </div>
+          </div><br />
+          <div class="row">
+            <div class="col-sm-3" align="right">  3. </div>
+            <div class="col-sm-9">
+              <input type="text" class="form-control textbox" name="remark_em_ot3" placeholder="" value="<?php echo @$problem_person[0]['em_ot3']?>" >
+            </div>
+          </div><br />
+          <div class="row">
+            <div class="col-sm-3" align="right"> <strong>คู่ธุรกิจ</strong> </div>
+            <div class="col-sm-9">
+              <input type="text" class="form-control textbox" name="remark_customer" placeholder="" value="<?php echo @$problem_person[0]['customer_name']?>" >
+            </div>
+          </div><br />
+          <div class="row">
+            <div class="col-sm-12" align="center"> 
+            <input type="hidden" class="form-control textbox" name="cut_size" placeholder="" value="<?php echo $this->uri->segment(3)?>">
+            <input type="hidden" class="form-control textbox" name="date" placeholder="" value="<?php echo $this->uri->segment(6)?>">
+            <input type="hidden" class="form-control textbox" name="shift" placeholder="" value="<?php echo $this->uri->segment(5)?>">
+            <button type="submit" class="btn btn-primary btn-lg">บันทึกข้อมูล</button> </div>
+          </div>
+          
+          <br />
+        </div>
+      </div>
+      <?php echo form_close()?>
+      <?php }elseif($this->uri->segment(3)==2||$this->uri->segment(3)==3){ 
+				if(empty($problem_person)){
+					echo form_open('logSheet_cutsize/insert_person_folio');
+				}else{
+					echo form_open('logSheet_cutsize/edit_person_folio');
+					echo '<input type="hidden" name="lfr_id" value="'.$problem_person[0]['lfr_id'].'">';
+				}?>
+      
+      <div class="row">
+    <div class="col-sm-12"><br /><br />
+          <div class="row">
+            <div class="col-sm-3" align="right"> <strong>หัวหน้ากะ</strong> </div>
+            <div class="col-sm-9">
+              <input type="text" class="form-control textbox" name="remark_head_shift" placeholder="" value="<?php echo @$problem_person[0]['remark_head_shift']?>">
             </div>
           </div>
           <br />
           <div class="row">
             <div class="col-sm-3" align="right"> Control </div>
             <div class="col-sm-9">
-              <input type="text" class="form-control textbox" name="remark_employee1" placeholder="">
+              <input type="text" class="form-control textbox" name="remark_employee1" placeholder="" value="<?php echo @$problem_person[0]['remark_employee1']?>">
             </div>
           </div><br />
 			<div class="row">
             <div class="col-sm-3" align="right"> Layboy </div>
             <div class="col-sm-9">
-              <input type="text" class="form-control textbox" name="remark_employee2" placeholder="">
+              <input type="text" class="form-control textbox" name="remark_employee2" placeholder="" value="<?php echo @$problem_person[0]['remark_employee2']?>">
             </div>
           </div><br />
             <div class="row">
             <div class="col-sm-3" align="right">Overtime 1. </div>
             <div class="col-sm-9">
-              <input type="text" class="form-control textbox" name="remark_em_ot1" placeholder="">
+              <input type="text" class="form-control textbox" name="remark_em_ot1" placeholder="" value="<?php echo @$problem_person[0]['remark_em_ot1']?>" >
             </div>
           </div>
           <br />
           <div class="row">
             <div class="col-sm-3" align="right">Overtime  2. </div>
             <div class="col-sm-9">
-              <input type="text" class="form-control textbox" name="remark_em_ot2" placeholder="Layboy">
+              <input type="text" class="form-control textbox" name="remark_em_ot2" placeholder="" value="<?php echo @$problem_person[0]['remark_em_ot2']?>">
             </div>
           </div>
           <br />
           <div class="row">
             <div class="col-sm-3" align="right"> <strong>คู่ธุรกิจ</strong> </div>
             <div class="col-sm-9">
-              <input type="text" class="form-control textbox" name="remark_customer" placeholder="">
+              <input type="text" class="form-control textbox" name="remark_customer" placeholder="" value="<?php echo @$problem_person[0]['remark_customer']?>">
             </div>
           </div><br />
           <div class="row">
-            <div class="col-sm-12" align="center"> <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button> </div>
+            <div class="col-sm-12" align="center"> 
+            <input type="hidden" class="form-control textbox" name="cut_size" placeholder="" value="<?php echo $this->uri->segment(3)?>">
+            <input type="hidden" class="form-control textbox" name="date" placeholder="" value="<?php echo $this->uri->segment(6)?>">
+            <input type="hidden" class="form-control textbox" name="shift" placeholder="" value="<?php echo $this->uri->segment(5)?>">
+            <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button> </div>
           </div>
           
           <br />
         </div>
       </div>
+      <?php echo form_close()?>
+      <?php } ?>
   <!------------------- END EMPLOYEE  ------------------->
     </div>
   </div>

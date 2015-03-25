@@ -12,6 +12,14 @@ class logSheet extends CI_Controller {
 	public function viewSet()
 	{
 		$data['cutter'] = $this->uri->segment(3);
+		if($data['cutter']==1||$data['cutter']==4){
+			$cutter_type = 1;
+		}elseif($data['cutter']==2||$data['cutter']==3){
+			$cutter_type = 2;
+		}else{
+			$cutter_type = 3;
+		}
+		$data['get_problem'] = $this->logsheet_model->get_problem($cutter_type);
 		$InData = array(
 			'cut_size' => $data['cutter'], 
 			'shift' => $this->uri->segment(5),
@@ -19,12 +27,22 @@ class logSheet extends CI_Controller {
 			);
 		if($data['cutter']==1||$data['cutter']==4){
 		$data['logSheet_set'] = $this->logsheet_model->getLogSheet_cutsize_shift($InData);
+		$data['problem_shift'] = $this->logsheet_model->get_cutsize_problem_shift($InData);
+		$data['problem_person'] = $this->logsheet_model->getLogSheet_remark_detail($InData);
 		}elseif($data['cutter']==2||$data['cutter']==3){
 		$data['logSheet_set'] = $this->logsheet_model->getLogSheet_folio_shift($InData);
+		$data['problem_shift'] = $this->logsheet_model->get_folio_problem_shift($InData);
+		$data['problem_person'] = $this->logsheet_model->getLogSheet_folio_remark_detail($InData);
 		}else{
 		$data['logSheet_set'] = $this->logsheet_model->getLogSheet_ream_shift($InData);
 		}
 
+		// echo "<pre>";
+		// print_r($data['logSheet_set']);
+		// print_r($data['get_problem']);
+		// print_r($data['problem_shift']);
+		// print_r($data['problem_person']);
+		// exit();
  		$data['page'] = "logSheet/search-log";
 		$this->load->view('index',$data);
 	}
