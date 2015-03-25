@@ -204,7 +204,7 @@
                 },
                 series: [{
                     name: "Output",
-                    data: $.map(total_donwtime, function(value, index) { return [value.total];});
+                    data: $.map(total_donwtime, function(value, index) { return [value.total]})
                 }],
                 valueAxis: {
                     labels: {
@@ -249,7 +249,3 @@
                     format: "yyyy-MM"
                 });
         </script>
-
-		<script src="<?php echo base_url().'assets/js/hightcharts/exporting.js'?>"></script>
-		<script src="<?php echo base_url().'assets/js/hightcharts/highcharts.js'?>"></script>
-		

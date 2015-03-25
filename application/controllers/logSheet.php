@@ -277,7 +277,9 @@ class logSheet extends CI_Controller {
 	}
 	public function log_ream_report(){
 		$data['downtime']=$this->log_ream_model->getDownTime();
-		$data['page']='log_ream_report';
+		$data['downtimechart'] =json_encode($this->log_ream_model->getDownTime());
+		$data['report'] = $this->log_ream_model->get_log_ream_report();
+		$data['page']='report/log_ream_report';
 		$this->load->view('index',$data);
 	}
 	public function log_cutsize_report(){
@@ -303,6 +305,11 @@ class logSheet extends CI_Controller {
 		$cutter = $this->input->post('cutter');
 		$end_date = $this->input->post('end_date');
 		redirect('logSheet/report-folio/'.$cutter.'/'.$end_date);
+	}
+		public function searchReamLog()
+	{
+		$end_date = $this->input->post('end_date');
+		redirect('logSheet/log_ream_report/'.$end_date);
 	}
 
 
