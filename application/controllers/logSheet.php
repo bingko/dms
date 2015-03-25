@@ -12,6 +12,14 @@ class logSheet extends CI_Controller {
 	public function viewSet()
 	{
 		$data['cutter'] = $this->uri->segment(3);
+		if($data['cutter']==1||$data['cutter']==4){
+			$cutter_type = 1;
+		}elseif($data['cutter']==2||$data['cutter']==3){
+			$cutter_type = 2;
+		}else{
+			$cutter_type = 3;
+		}
+		$data['get_problem'] = $this->logsheet_model->get_problem($cutter_type);
 		$InData = array(
 			'cut_size' => $data['cutter'], 
 			'shift' => $this->uri->segment(5),
@@ -19,12 +27,22 @@ class logSheet extends CI_Controller {
 			);
 		if($data['cutter']==1||$data['cutter']==4){
 		$data['logSheet_set'] = $this->logsheet_model->getLogSheet_cutsize_shift($InData);
+		$data['problem_shift'] = $this->logsheet_model->get_cutsize_problem_shift($InData);
+		$data['problem_person'] = $this->logsheet_model->getLogSheet_remark_detail($InData);
 		}elseif($data['cutter']==2||$data['cutter']==3){
 		$data['logSheet_set'] = $this->logsheet_model->getLogSheet_folio_shift($InData);
+		$data['problem_shift'] = $this->logsheet_model->get_folio_problem_shift($InData);
+		$data['problem_person'] = $this->logsheet_model->getLogSheet_folio_remark_detail($InData);
 		}else{
 		$data['logSheet_set'] = $this->logsheet_model->getLogSheet_ream_shift($InData);
 		}
 
+		// echo "<pre>";
+		// print_r($data['logSheet_set']);
+		// print_r($data['get_problem']);
+		// print_r($data['problem_shift']);
+		// print_r($data['problem_person']);
+		// exit();
  		$data['page'] = "logSheet/search-log";
 		$this->load->view('index',$data);
 	}
@@ -275,6 +293,7 @@ class logSheet extends CI_Controller {
 			}
 		}
 	}
+
 	public function log_ream_report(){
 		$data['downtime']=$this->log_ream_model->getDownTime();
 		$data['downtimechart'] =json_encode($this->log_ream_model->getDownTime());
@@ -309,9 +328,38 @@ class logSheet extends CI_Controller {
 		public function searchReamLog()
 	{
 		$end_date = $this->input->post('end_date');
-		redirect('logSheet/log_ream_report/'.$end_date);
+		redirect('logSheet/log_ream_report/5/'.$end_date);
 	}
+	public function check_target()
+	{
+		$list_target = $this->setting_model->list_target();
 
+		if(empty($list_target)){
+			$date = new DateTime(date('Y-m'));
+			$date->sub(new DateInterval('P1M'));
+			$month =  $date->format('Y-m');
+			$target_lastMonth = $this->setting_model->list_target_lastMonth($month);
+			
+			//exit();
+			$target_name[0] = "Prod/Target (Cut Size)" ;
+			$target_name[1] = "Yiled Target (Cut Size)" ;
+			$target_name[2] = "Target Ton/Day (Folio)" ;
+			$target_name[3] = "M/C Running Target (Folio)" ;
+			$target_name[4] = "Target Pack/Day (REAM)" ;
+			$target_name[5] = "M/C Running Target (REAM)" ;
+			$target_name[6] = "DOWN TIME Target (REAM)" ;
+
+			for($i=0;$i<7;$i++){
+				$list_data = array(
+					'target_name' => $target_name[$i],
+					'target_date' => date('Y-m-d'), 
+					'target_value' => $target_lastMonth[$i]['target_value'], 
+					'target_type' => $target_lastMonth[$i]['target_type'],  
+				);
+			$this->setting_model->target_insert($list_data);
+			}
+		}
+	}
 
 	
 }

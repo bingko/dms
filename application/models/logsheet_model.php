@@ -114,7 +114,15 @@ class logsheet_model extends CI_Model {
 		$this->db->update('log_sheet_problem',$list_data);
 	}
 	public function getLogSheet_cutsize_shift($InData){
-		//$this->db->select('c_id');
+		$this->db->select('
+					cutsize_data.grade_gram,
+					cutsize_data.mat_no,
+					cutsize_data.total_ream,
+					cutsize_data.output_weight,
+					cutsize_data.set,
+					cutsize_data.c_id
+				');
+		$this->db->order_by('cutsize_data.set','asc');
 		$this->db->where('shift',$InData['shift']);
 		$this->db->where('date',$InData['date']);
 		$this->db->where('cut_size',$InData['cut_size']);
@@ -122,7 +130,6 @@ class logsheet_model extends CI_Model {
 		return $query->result_array();
 	}
 	public function getLogSheet_folio_shift($InData){
-		//$this->db->select('c_id');
 		$this->db->where('shift',$InData['shift']);
 		$this->db->where('date',$InData['date']);
 		$this->db->where('cutter',$InData['cut_size']);
@@ -148,9 +155,11 @@ class logsheet_model extends CI_Model {
 		$query = $this->db->get('log_cutter_problem');
 		return $query->result_array();
 	}
-	public function getLogSheet_remark_detail($c_id)
+	public function getLogSheet_remark_detail($InData)
 	{
-		$this->db->where('c_id',$c_id);
+		$this->db->where('cut_size',$InData['cut_size']);
+		$this->db->where('date',$InData['date']);
+		$this->db->where('shift',$InData['shift']);
 		$query = $this->db->get('log_cutsize_remark');
 		return $query->result_array();
 	}
@@ -166,9 +175,11 @@ class logsheet_model extends CI_Model {
 		$query = $this->db->get('log_folio_problem');
 		return $query->result_array();
 	}
-	public function getLogSheet_folio_remark_detail($f_id)
+	public function getLogSheet_folio_remark_detail($InData)
 	{
-		$this->db->where('f_id',$f_id);
+		$this->db->where('cut_size',$InData['cut_size']);
+		$this->db->where('date',$InData['date']);
+		$this->db->where('shift',$InData['shift']);
 		$query = $this->db->get('log_folio_remark');
 		return $query->result_array();
 	}
@@ -198,5 +209,37 @@ class logsheet_model extends CI_Model {
 		$this->db->join('log_sheet_problem','log_sheet_problem.problem_id = log_cutter_problem.problem_id');
 		$query = $this->db->get('log_cutter_problem');
 		return $query->result_array();
+	}
+	public function get_cutsize_problem_shift($InData)
+	{
+		$this->db->select('
+			log_cutter_problem.problem_id,
+			log_cutter_problem.total_minutes,
+			log_cutter_problem.problem_remark,
+			log_cutter_problem.c_id,
+			cutsize_data.set
+			');
+		$this->db->where('cutsize_data.cut_size',$InData['cut_size']);
+		$this->db->where('cutsize_data.date',$InData['date']);
+		$this->db->where('cutsize_data.shift',$InData['shift']);
+		$this->db->join('log_cutter_problem','log_cutter_problem.c_id = cutsize_data.c_id ');
+		$query = $this->db->get('cutsize_data');
+		return $query->result_array();
 	} 
+	public function get_folio_problem_shift($InData)
+	{
+		$this->db->select('
+			log_folio_problem.problem_id,
+			log_folio_problem.min,
+			log_folio_problem.problem_remark,
+			log_folio_problem.f_id,
+			folio_data.set
+			');
+		$this->db->where('folio_data.cutter',$InData['cut_size']);
+		$this->db->where('folio_data.date',$InData['date']);
+		$this->db->where('folio_data.shift',$InData['shift']);
+		$this->db->join('log_folio_problem','log_folio_problem.f_id = folio_data.f_id ');
+		$query = $this->db->get('folio_data');
+		return $query->result_array();
+	}
 }

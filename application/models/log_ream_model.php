@@ -49,11 +49,11 @@ class log_ream_model extends CI_Model {
 	return $query->result_array();
 	}
 		public function get_year(){
-		$date=$this->uri->segment(3);
+		$date=$this->uri->segment(4);
 		return date("Y",strtotime($date));
 	}	
 	public function  get_month(){
-		$date=$this->uri->segment(3);
+		$date=$this->uri->segment(4);
 		return date("m",strtotime($date));
 	}
 	public function get_log_ream_report(){

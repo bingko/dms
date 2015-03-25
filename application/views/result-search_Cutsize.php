@@ -18,7 +18,20 @@ text-align:center;
   <div class="row">
     <div class="col-lg-12">
       <div style="float:left">
-        <h2>Cutting Result </h2>
+        <h2>Cutting Result <?php
+			  if($sheeter==1){
+				  echo 'Cutsize1';
+			  }
+			  else if($sheeter==2){
+				  echo 'Folio1';
+			  }
+			  else if($sheeter==3){
+				  echo 'Folio2';
+			  }
+			  else if($sheeter==4){
+				  echo 'Cutsize2';
+			  }
+			  ?></h2>
         <h4>Datetime : <?php echo $this->input->post('end_date') ?>
         </h4>
       </div>
@@ -39,20 +52,7 @@ text-align:center;
               <th colspan="10" style="background-color:rgb(228, 255, 194)">ข้อมูลหลังตัด</th>
             </tr>
 			<tr style="background-color:white">
-              <th><?php
-			  if($sheeter==1){
-				  echo 'Cutsize1';
-			  }
-			  else if($sheeter==2){
-				  echo 'Folio1';
-			  }
-			  else if($sheeter==3){
-				  echo 'Folio2';
-			  }
-			  else if($sheeter==4){
-				  echo 'Cutsize2';
-			  }
-			  ?></th>
+              <th></th>
               <th>กะ</th>
               <th>ชุดตัดที่</th>
               <th>วันที่</th>
