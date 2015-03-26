@@ -292,15 +292,16 @@ class logSheet extends CI_Controller {
 		}
 	}
 	public function log_ream_report(){
-		$this->check_target();
 		$data['downtime']=$this->log_ream_model->getDownTime();
-		$data['page']='log_ream_report';
+		$data['downtimechart'] =json_encode($this->log_ream_model->getDownTime());
+		$data['report'] = $this->log_ream_model->get_log_ream_report();
+		$data['page']='report/log_ream_report';
 		$this->load->view('index',$data);
 	}
 	public function log_cutsize_report(){
-		$this->check_target();
 		$data['page']='report/log_cutsize_report';
 		$data['cutsize']=$this->logsheet_cutsize_report->get_cutsize_log();
+		$data['report']=$this->logsheet_cutsize_report->get_cutsize_log_chart();
 		$data['downtime']=$this->logsheet_cutsize_report->get_problem_report();
 		$this->load->view('index',$data);
 	}
@@ -311,7 +312,6 @@ class logSheet extends CI_Controller {
 		redirect('logSheet/log_cutsize_report/'.$cutter.'/'.$end_date);
 	}
 	public function log_folio_report(){
-		$this->check_target();
 		$data['page']='report/report-folio';
 		$data['cutsize']=$this->logsheet_folio_report->get_cutsize_log();
 		$data['downtime']=$this->logsheet_folio_report->get_problem_report();
@@ -322,6 +322,11 @@ class logSheet extends CI_Controller {
 		$cutter = $this->input->post('cutter');
 		$end_date = $this->input->post('end_date');
 		redirect('logSheet/report-folio/'.$cutter.'/'.$end_date);
+	}
+		public function searchReamLog()
+	{
+		$end_date = $this->input->post('end_date');
+		redirect('logSheet/log_ream_report/5/'.$end_date);
 	}
 	public function check_target()
 	{

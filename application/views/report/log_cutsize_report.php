@@ -123,33 +123,9 @@
 	</div>
             <script>
 			$(document).ready(function(){
-			var value=<?php echo $this->logsheet_cutsize_report->get_cutsize_log_chart()?>;
+			var report=<?php echo $report?>;
 			var total_donwtime=<?php echo $this->logsheet_cutsize_report->get_cutsize_problem_chart()?>;
 			var value3=$.map(<?php echo $this->logsheet_cutsize_report->get_cutsize_problem_chart()?>, function(value, index) { return [value.problem_name];});
-			var serie = function(){
-				var a=[];
-				for(var i=0;i< value.length;i++){
-					a.push(parseInt(value[i].summary));
-				}
-				return a;
-				
-			}
-			var serie = function(){
-				var a=[];
-				for(var i=0;i< value.length;i++){
-					a.push(parseInt(value[i].summary));
-				}
-				return a;
-				
-			}
-			var target = function(){
-				var a=[];
-				for(var i=0;i< value.length;i++){
-					a.push(210);
-				}
-				return a;
-				
-			}
             $("#charts").kendoChart({
                 title: {
                     text: "Cutsize"
@@ -162,10 +138,10 @@
                 },
                 series: [{
                     name: "Output",
-                    data: serie()
+                    data: $.map(report, function(value, index) { return [value.summary];})
                 }, {
                     name: "Target",
-                    data: target()
+                    data: $.map(report, function(value, index) { return [210];})
                 }],
                 valueAxis: {
                     labels: {
@@ -177,7 +153,7 @@
                     axisCrossingValue: 0
                 },
                 categoryAxis: {
-                    categories: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+                    categories: $.map(report, function(value, index) { return [value.date];}),
                     line: {
                         visible: false
                     },
@@ -204,7 +180,7 @@
                 },
                 series: [{
                     name: "Output",
-                    data: $.map(total_donwtime, function(value, index) { return [value.total];});
+                    data: $.map(total_donwtime, function(value, index) { return [value.total];})
                 }],
                 valueAxis: {
                     labels: {

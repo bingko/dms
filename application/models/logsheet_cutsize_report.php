@@ -36,7 +36,7 @@ class logsheet_cutsize_report extends CI_Model {
 		$this->db->where('YEAR(date)',$this->get_year());
 		$this->db->where('MONTH(date)',$this->get_month());
 		$this->db->where('cut_size',$this->get_cutter());
-		$this->db->select('SUM(output_weight) as summary');
+		$this->db->select('SUM(output_weight) as summary,DAY(date) as date');
 		$this->db->group_by('DAY(date)');
 		$query = $this->db->get('cutsize_data');
 		return json_encode($query->result_array());

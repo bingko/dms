@@ -124,62 +124,67 @@ vertical-align:middle;
               $dailysum=array();
           }
 		  
-			if(!isset($dailysum['sumrow'])){
-			  $dailysum['sumrow']=0; 
-			  $dailysum['input']=0;
-			  $dailysum['ream']=0;
-			  $dailysum['output']=0;
-			  $dailysum['roll']=0;
+			if($cutsize[$i]['input']!=@$cutsize[$i-1]['input']){
+  			echo '<tr>';
+  			echo '<td>'.$cutsize[$i]['CT'].'</td>';
+  			echo '<td>'.$cutsize[$i]['shift'].'</td>';
+  			echo '<td>'.$cutsize[$i]['lot'].'</td>';
+        echo '<td>'.$cutsize[$i]['CustomerOrder'].'</td>';
+  			echo '<td>'.$cutsize[$i]['time'].'</td>';
+  			echo '<td>'.$cutsize[$i]['Grade'].'</td>';
+  			echo '<td>'.$cutsize[$i]['gram'].'</td>';
+  			echo '<td>'.$cutsize[$i]['width'].'</td>';
+  			echo '<td>'.$cutsize[$i]['roll'].'</td>';
+  			echo '<td>'.$cutsize[$i]['input'].'</td>';
+  			echo '<td style="border-right:1px solid">'.substr($cutsize[$i]['mat_no'],-4).'</td>';
+  			echo '<td>'.$cutsize[$i]['paper_width'].' x '.$cutsize[$i]['paper_height'].'</td>';
+        echo '<td>'.(0+$cutsize[$i]['N']).'</td>';
+        echo '<td>'.round($cutsize[$i]['output_n'],3).'</td>';
+        echo '<td>'.(0+$cutsize[$i]['Sort']).'</td>';
+        echo '<td>'.round(($cutsize[$i]['output']-$cutsize[$i]['output_n']),3).'</td>';
+  			echo '<td>'.number_format($cutsize[$i]['ream']).'</td>';
+  			echo '<td>'.round($cutsize[$i]['output'],3).'</td>';
+  			echo '<td>'.round($cutsize[$i]['trim_lost'],3).'</td>';
+  			echo '<td>'.$cutsize[$i]['remake'].'</td>';
+  			echo '<td>'.round($cutsize[$i]['reject'],3).'</td>';
+  			echo '<td>'.round($cutsize[$i]['total_reject'],3).'</td>';
+  			echo '<td>'.round($cutsize[$i]['percent_reject'],3).'</td>';
+  			echo '<td>'.round($cutsize[$i]['actual_reject'],3).'</td>';
+        echo '</tr>';
+        @$dailysum['sumrow']+=1;
+        @$dailysum['input']+=$cutsize[$i]['input'];
+        @$dailysum['ream']+=$cutsize[$i]['ream'];
+        @$dailysum['output']+=$cutsize[$i]['output'];
+        @$dailysum['roll']+=$cutsize[$i]['roll'];
 			}
-			$dailysum['sumrow']+=1;
-			$dailysum['input']+=$cutsize[$i]['input'];
-			$dailysum['ream']+=$cutsize[$i]['ream'];
-			$dailysum['output']+=$cutsize[$i]['output'];
-			$dailysum['roll']+=$cutsize[$i]['roll'];
-			
-			echo '<tr>';
-			echo '<td>'.$cutsize[$i]['CT'].'</td>';
-			echo '<td>'.$cutsize[$i]['shift'].'</td>';
-			echo '<td>'.$cutsize[$i]['lot'].'</td>';
-      echo '<td>'.$cutsize[$i]['CustomerOrder'].'</td>';
-			echo '<td>'.$cutsize[$i]['time'].'</td>';
-			echo '<td>'.$cutsize[$i]['Grade'].'</td>';
-			echo '<td>'.$cutsize[$i]['gram'].'</td>';
-			echo '<td>'.$cutsize[$i]['width'].'</td>';
-			echo '<td>'.$cutsize[$i]['roll'].'</td>';
-			//if($i-1>=0){
-			//	if(($cutsize[$i]['lot']!=$cutsize[$i-1]['lot'])&&($cutsize[$i]['input']!=$cutsize[$i-1]['input'])){
-					echo '<td>'.$cutsize[$i]['input'].'</td>';
-			//	}
-				//else{
-				//	echo '<td></td>';
-								//$dailysum['sumrow']-=1;
-		//	$dailysum['input']+=$cutsize[$i]['input'];
-			//$dailysum['ream']+=$cutsize[$i]['ream'];
-			//$dailysum['output']+=$cutsize[$i]['output'];
-			//$dailysum['roll']+=$cutsize[$i]['roll'];
-				//}
-			//}
-			//else{
-				//	echo '<td>'.$cutsize[$i]['input'].'</td>';
-			//}
-			echo '<td style="border-right:1px solid">'.substr($cutsize[$i]['mat_no'],-4).'</td>';
-			echo '<td>'.$cutsize[$i]['paper_width'].' x '.$cutsize[$i]['paper_height'].'</td>';
-            echo '<td>'.(0+$cutsize[$i]['N']).'</td>';
-            echo '<td>'.round($cutsize[$i]['output_n'],3).'</td>';
-            echo '<td>'.(0+$cutsize[$i]['Sort']).'</td>';
-            echo '<td>'.round(($cutsize[$i]['output']-$cutsize[$i]['output_n']),3).'</td>';
-			echo '<td>'.number_format($cutsize[$i]['ream']).'</td>';
-			echo '<td>'.round($cutsize[$i]['output'],3).'</td>';
-			echo '<td>'.round($cutsize[$i]['trim_lost'],3).'</td>';
-			echo '<td>'.$cutsize[$i]['remake'].'</td>';
-			echo '<td>'.round($cutsize[$i]['reject'],3).'</td>';
-			echo '<td>'.round($cutsize[$i]['total_reject'],3).'</td>';
-			echo '<td>'.round($cutsize[$i]['percent_reject'],3).'</td>';
-			echo '<td>'.round($cutsize[$i]['actual_reject'],3).'</td>';
-            echo '</tr>';
-			
-			
+			else{
+        echo '<tr>';
+        echo '<td></td>';
+        echo '<td>'.$cutsize[$i]['shift'].'</td>';
+        echo '<td>'.$cutsize[$i]['lot'].'</td>';
+        echo '<td>'.$cutsize[$i]['CustomerOrder'].'</td>';
+        echo '<td>'.$cutsize[$i]['time'].'</td>';
+        echo '<td>'.$cutsize[$i]['Grade'].'</td>';
+        echo '<td>'.$cutsize[$i]['gram'].'</td>';
+        echo '<td>'.$cutsize[$i]['width'].'</td>';
+        echo '<td>'.$cutsize[$i]['roll'].'</td>';
+        echo '<td></td>';
+        echo '<td style="border-right:1px solid">'.substr($cutsize[$i]['mat_no'],-4).'</td>';
+        echo '<td>'.$cutsize[$i]['paper_width'].' x '.$cutsize[$i]['paper_height'].'</td>';
+        echo '<td>'.(0+$cutsize[$i]['N']).'</td>';
+        echo '<td>'.round($cutsize[$i]['output_n'],3).'</td>';
+        echo '<td>'.(0+$cutsize[$i]['Sort']).'</td>';
+        echo '<td>'.round(($cutsize[$i]['output']-$cutsize[$i]['output_n']),3).'</td>';
+        echo '<td>'.number_format($cutsize[$i]['ream']).'</td>';
+        echo '<td>'.round($cutsize[$i]['output'],3).'</td>';
+        echo '<td>'.round($cutsize[$i]['trim_lost'],3).'</td>';
+        echo '<td>'.$cutsize[$i]['remake'].'</td>';
+        echo '<td>'.round($cutsize[$i]['reject'],3).'</td>';
+        echo '<td>'.round($cutsize[$i]['total_reject'],3).'</td>';
+        echo '<td>'.round($cutsize[$i]['percent_reject'],3).'</td>';
+        echo '<td>'.round($cutsize[$i]['actual_reject'],3).'</td>';
+        echo '</tr>';
+      }
 			if((($i==count($cutsize)-1)&&($this->input->post('date_type')=='month'))){ //add last result
               $daily=date_create(date_create($cutsize[$i]['time'])->format('Y-m-d 07:00:00'));
               $daily->add(new DateInterval('P1D')); //add one day to compare next day
